@@ -1,9 +1,12 @@
 // Compila il programma con "make run"
 
 #include <stdio.h>
+#include <string.h>
 #include "functions.h"
 
 // Creiamo un array multidimensionale per contenere le 21 tessere possibili ciascuna con una coppia di numeri da 1 a 6.
+// L'array contiene 20 tessere che hanno ciascuna due facce (top bottom nella funzione 'spawn_tile')
+// Se vuoi conoscere la due facce di tessera devi printare gameSet [indice] [0] e gameSet [indice] [1] 
 int gameSet [20][2];
 // Creiamo un array contenente l'indice dell'array gameSet contenente le tessere in possesso del player.
 int playerTiles [21];
@@ -44,10 +47,17 @@ void start () {
 }
     
 
-int main() {
+int main(int argc, char* argv[]) {
     // Avvio
     clear_console();
     introMessage();
+    for (int i = 0; i< argc; i++) {
+        printf("Parametro: %s\n", argv[i]);
+        if ((strcmp((argv[i]), "--challenge")) == 0) {
+            clear_console();
+            printf("Modalità Challenge.");
+        }
+    }
     getchar();
     clear_console();
 

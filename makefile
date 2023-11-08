@@ -1,7 +1,7 @@
 # Non sta toccar.
 
 CC = clang
-CFLAGS = -Wall -Werror 
+CFLAGS = -Wall -Werror -std=c99
 
 .PHONY: all clean
 

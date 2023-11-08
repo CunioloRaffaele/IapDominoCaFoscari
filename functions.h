@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#include "functions/initialization.h"
-#include "functions/terminal_handler.h"
-#include "functions/intro_message.h"
-#include "functions/tiles_generator.h"
+#include "functions/initialization.c"
+#include "functions/terminal_handler.c"
+#include "functions/intro_message.c"
+#include "functions/tiles_generator.c"
 
 void introMessage ();                                       // Questa funzione mostra la "grafica testuale" di avvio programma.
                                                             // Funzione implementata per rendere più leggibile il main().

@@ -17,10 +17,4 @@ void generate_tiles_composition (int array[20][2]) {
             it = it+1;
         }
     }
-/*
-    for (int counter = 0; counter <= 20; counter ++) {
-        printf("(%d , ", array [counter][0]);
-        printf("%d) \n", array [counter][1]);
-    }
-*/
 }

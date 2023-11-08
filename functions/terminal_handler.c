@@ -1,16 +1,16 @@
 #include <stdio.h>
-#include <unistd.h>
-//#include <sys/ioctl.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+    #include <windows.h>
+#elif __APPLE__ || __linux__ || __unix__                                                                 // MacOs + Linux
+    #include <sys/ioctl.h>
+#endif
 
 void colorzz (int color) {
-
-    #ifdef _WIN32
-        printf("");
-        // TODO
-    #else
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+        //TODO using the SetConsoleTextAttribute() function in the Win32 API
+    #elif __APPLE__ || __linux__ || __unix__                                                                 // MacOs + Linux
         switch (color)
         {
         case 0:
@@ -39,15 +39,27 @@ void clear_console() {
 }
 
 int screen_row () {
-    struct winsize w;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    return w.ws_row;
+    int size = 0;
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+        //TODO with Win32 API
+    #elif __APPLE__ || __linux__ || __unix__                                                                 // MacOs + Linux
+        struct winsize w;
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+        size =  w.ws_row;
+    #endif
+    return size;
 }
 
 int screen_col () {
-    struct winsize w;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    return w.ws_col;
+    int size = 0;
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+        //TODO with Win32 API
+    #elif __APPLE__ || __linux__ || __unix__                                                                 // MacOs + Linux
+        struct winsize w;
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+        size = w.ws_col;
+    #endif
+    return size;
 }
 
 void spawn_screen_with_title (char title[]) {
