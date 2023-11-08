@@ -3,6 +3,10 @@
 #include <string.h>
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
 #include <windows.h>
+
+CONSOLE_SCREEN_BUFFER_INFO csbi;
+int ret;
+
 #elif __APPLE__ || __linux__ || __unix__ // MacOs + Linux
 #include <sys/ioctl.h>
 #endif
@@ -10,7 +14,6 @@
 void colorzz(int color)
 {
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
-                                                                               // TODO using the SetConsoleTextAttribute() function in the Win32 API
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
     WORD saved_attributes;
@@ -21,7 +24,7 @@ void colorzz(int color)
 
     switch (color)
     {
-    case 0://Restore to original color attribute
+    case 0: // Restore to original color attribute
         SetConsoleTextAttribute(hConsole, saved_attributes);
         break;
     case 1:
@@ -75,7 +78,12 @@ int screen_row()
 {
     int size = 0;
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
-    // TODO with Win32 API
+    ret = GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    if (ret)
+    {
+        return csbi.dwSize.Y;
+    }
+
 #elif __APPLE__ || __linux__ || __unix__ // MacOs + Linux
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -88,7 +96,12 @@ int screen_col()
 {
     int size = 0;
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
-    // TODO with Win32 API
+    ret = GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    if (ret)
+    {
+        return csbi.dwSize.X;
+    }
+
 #elif __APPLE__ || __linux__ || __unix__ // MacOs + Linux
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
