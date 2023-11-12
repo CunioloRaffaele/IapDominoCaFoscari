@@ -8,10 +8,10 @@
 // L'array contiene 20 tessere che hanno ciascuna due facce (top bottom nella funzione 'spawn_tile')
 // Se vuoi conoscere la due facce di tessera devi printare gameSet [indice] [0] e gameSet [indice] [1] 
 int gameSet [20][2];
-// Creiamo un array contenente l'indice dell'array gameSet contenente le tessere in possesso del player.
-int playerTiles [21];
+// Puntatore di memoria all'array multidimensionale contenente le tessere del giocatore
+int **playerDeck;
 
-void start () {
+void menuUi () {
     spawn_screen_with_title("MENU");
     int menuOption;
     colorzz(2);
@@ -31,7 +31,7 @@ void start () {
             spawn_tile(gameSet[counter][0], gameSet[counter][1]);
         }
         sleep(10);
-        start();
+        menuUi();
         break;
     case 2:
         spawn_screen_with_title("OTTIENI TILES");
@@ -45,19 +45,34 @@ void start () {
     //generate_player_deck(playerTiles, 21);
     colorzz(0);
 }
+
+void challengeMode () {
+    // Creazione dell'array contenente i tiles del player e inserimento dei dati.
+    int counterPlayerTiles = 0;
+    scanf("%d", & counterPlayerTiles);
+    playerDeck = alloc_player_deck_memory (counterPlayerTiles);
+    for (int counter = 0; counter < counterPlayerTiles; counter ++) {
+        scanf("%d %d", &playerDeck[counter][0], &playerDeck[counter][1]);
+    }
+
+    // Free della memoria allocata all'array contenente i tiles del player
+    for (int i = 0; i < counterPlayerTiles; i++) {
+        free (playerDeck[i]);
+    }
+    free (playerDeck);
+    exit(0);
+}
     
 
 int main(int argc, char* argv[]) {
     // Avvio
-    clear_console();
-    introMessage();
     for (int i = 0; i< argc; i++) {
-        printf("Parametro: %s\n", argv[i]);
         if ((strcmp((argv[i]), "--challenge")) == 0) {
-            clear_console();
-            printf("Modalità Challenge.");
+            challengeMode();
         }
     }
+    clear_console();
+    introMessage();
     getchar();
     clear_console();
 
@@ -65,7 +80,7 @@ int main(int argc, char* argv[]) {
     generate_tiles_composition(gameSet);
 
     // Menu
-    start();
+    menuUi();
 
     clear_console();
     introMessage();

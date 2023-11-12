@@ -8,8 +8,7 @@
 void introMessage ();                                       // Questa funzione mostra la "grafica testuale" di avvio programma.
                                                             // Funzione implementata per rendere più leggibile il main().
 // generate_player_deck (array, dimensione array)
-void generate_player_deck (int*, int);                            // Questa funzione contiene tutte le procedure da effettuare all'avvio del programma.
-                                                            // Crea set di tessere e porta a 0 l'array di tessere del giocatore.
+void generate_player_deck (int*, int);                      // Crea set di tessere.
 
 // colorzz (codice colore)
 void colorzz (int);                                         // Seleziona il colore del terminale (0 reset - 1 rosso - 2 verde - 3 blu - 4 bianco). 
@@ -29,3 +28,10 @@ void spawn_tile (int, int);                                 // Genera una tile a
 
 // generate_tiles_composition (array)
 void generate_tiles_composition (int[20][2]);               // Genera 21 tessere, ciascuna con una coppia di numeri da 1 a 6.
+
+// alloc_player_deck_memory (dimensione array)
+int** alloc_player_deck_memory (int);                       // Data la dimensione dell'array viene preparata una porzione di memoria che contenga 
+                                                            // l'array bidimensionale (tiles del player nell'indice 0 e 1)
+                                                            // RICORDARSI di liberare adeguatamente la memoria dopo l'utilizzo e prima di terminare il programma.
+
+// LE SEGUENTI SONO FUNZIONI CHE VANNO USATE SOLO QUANDO IL PROGRAMMA VIENE LANCIATO CON IL PARAMETRO --challenge

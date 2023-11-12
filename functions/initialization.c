@@ -2,6 +2,15 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+int** alloc_player_deck_memory (int src_size) {
+    int **generatedMalloc;
+    generatedMalloc = (int**) malloc(sizeof(int*) * src_size);      // allochiamo la memoria per x int* (che contengono i puntatori agli interi dell'array)
+    for (int i = 0; i < src_size; i ++){
+        generatedMalloc[i] = (int*) malloc(2 * sizeof(int));
+    }
+    return generatedMalloc;
+}
+
 void generate_player_deck (int *playerTiles, int arrayDimensions) {
     for (int counter = 0; counter < arrayDimensions; counter++) {
         *(playerTiles+counter) = 0;
