@@ -37,7 +37,7 @@ void colorzz(int color) {
 
 void clear_console() {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
-        clrscr();
+        system("cls");
     #elif __APPLE__ || __linux__ || __unix__                                        // MacOs + Linux
         printf("\e[H\e[2J\e[3J"); // This tells the terminal to move the cursor to the top left corner (\e[H), clear the screen (\e[2J), and clear the scrollback buffer (\e[3J).
     #endif
