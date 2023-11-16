@@ -8,6 +8,7 @@
     int ret;
 #elif __APPLE__ || __linux__ || __unix__                                        // MacOs + Linux
     #include <sys/ioctl.h>
+    #include <unistd.h>
 #endif
 
 void colorzz(int color) {

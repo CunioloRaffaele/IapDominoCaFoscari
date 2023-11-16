@@ -77,8 +77,9 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
                 // Aggiorniamo il counter di elementi in ordine
                 *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
             } else {
-                // Se non esiste nessuna tessera compatibile con quella precedente break
-                break;
+                // Se la tessera non è un match con la precedente faccia azzero deckCopy[rowCounter][0] e deckCopy[rowCounter][1]
+                deckCopy[rowCounter][0] = 0;
+                deckCopy[rowCounter][1] = 0;
             }
         }
     }
