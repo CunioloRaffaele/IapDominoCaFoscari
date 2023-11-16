@@ -1,24 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h> 
-#include "initialization.c"
 
 bool is2dArrayEmpty(int** array, int rows) {
+    int numberOfEmptyElements = 0;
     for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < 2; j++) {
-            if (array[i][j] != 0) {
-                return false;  // Restituisce falso se trova un elemento diverso da zero
-            }
+        if ((array[i][1] || array[i][0]) == 0) {
+            numberOfEmptyElements++;
         }
     }
-    return true;  // Ritorna vero se non trova elementi diversi da zero
+    if(numberOfEmptyElements == rows) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-int* processAI (int** deck, int deckDimension, int indexOfStartingTile) {
+int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *numbersOfElementsIndexInOrder) {
     // Creiamo una malloc contenente gli indici delle tessere da giocare in ordine
     // Gli indici negativi indicano che la tessera va girata
     // Questa malloc deve essere liberata dal chiamante della funzione
-    int numbersOfElementsIndexInOrder = 0;
+    *numbersOfElementsIndexInOrder = 0;
     int* indexInOrder = (int*) malloc (sizeof(int) * deckDimension);
     if (indexInOrder == NULL) {
         exit(1);
@@ -41,39 +43,44 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile) {
     deckCopy[indexOfStartingTile][0] = 0;
     deckCopy[indexOfStartingTile][1] = 0;
     // Aggiorniamo il counter di elementi in ordine
-    numbersOfElementsIndexInOrder++;
+    *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
 
-    while (is2dArrayEmpty(** deckCopy, deckDimension)) {
+    while (!is2dArrayEmpty(deckCopy, deckDimension)) {
         // Salviamo la seconda faccia dell'ultima tessera valutata
-        int latestCard1Face = deckCopy[indexInOrder[numbersOfElementsIndexInOrder - 1]][1];
+        int latestCard1Face = deckCopy[indexInOrder[*numbersOfElementsIndexInOrder - 1]][1];
         // Confronta la seconda faccia dell'ultima tessera con le altre tessere in deckCopy
         for (int rowCounter = 0; rowCounter < deckDimension; rowCounter++) {
             if (deckCopy[rowCounter][0] == latestCard1Face) {
                 // Se la tessera è compatibile la aggiungiamo all'array indexInOrder
-                indexInOrder[numbersOfElementsIndexInOrder] = rowCounter;
+                indexInOrder[*numbersOfElementsIndexInOrder] = rowCounter;
                 // Rimuoviamo la tessera dal deck
                 deckCopy[rowCounter][0] = 0;
                 deckCopy[rowCounter][1] = 0;
                 // Aggiorniamo il counter di elementi in ordine
-                numbersOfElementsIndexInOrder++;
+                *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
             } else if (deckCopy[rowCounter][1] == latestCard1Face) {
                 // Se la tessera è compatibile la aggiungiamo all'array indexInOrder invertendola (aggiungendo - all'indice)
-                indexInOrder[numbersOfElementsIndexInOrder] = -rowCounter;
+                indexInOrder[*numbersOfElementsIndexInOrder] = -rowCounter;
                 // Rimuoviamo la tessera dal deck
                 deckCopy[rowCounter][0] = 0;
                 deckCopy[rowCounter][1] = 0;
                 // Aggiorniamo il counter di elementi in ordine
-                numbersOfElementsIndexInOrder++;
+                *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
             }
         }
     }
-
-
 
     // Free della memoria allocata all'array deckCopy
     for (int i = 0; i < deckDimension; i++) {
         free (deckCopy[i]);
     }
     free (deckCopy);
+
+    // Ridimensioniamo la malloc IndexInOrder in modo che contenga solo gli n elementi indicati da *numbersOfElementsIndexInOrder
+    indexInOrder = (int*) realloc (indexInOrder, sizeof(int) * *numbersOfElementsIndexInOrder);
+    if (indexInOrder == NULL) {
+        exit(1);
+    }
+    // Ritorniamo l'array contenente gli indici in ordine dell'array deck passato in argomento alla funzione
     return indexInOrder;
 }

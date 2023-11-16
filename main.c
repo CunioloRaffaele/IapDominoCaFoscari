@@ -54,7 +54,11 @@ void challengeMode () {
     for (int counter = 0; counter < deckDimension; counter ++) {
         scanf("%d %d", &playerDeck[counter][0], &playerDeck[counter][1]);
     }
-    int* AiResult =processAI(playerDeck, deckDimension);
+    int processAIDimension = 0; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
+    int* AiResult = processAI(playerDeck, deckDimension, 0, &processAIDimension);
+    for (int counter = 0; counter < processAIDimension; counter ++) {
+        printf("%d %d \n", processAIDimension, AiResult[counter]);
+    }
     // Free della memoria allocata all'array contenente i tiles del player
     for (int i = 0; i < deckDimension; i++) {
         free (playerDeck[i]);

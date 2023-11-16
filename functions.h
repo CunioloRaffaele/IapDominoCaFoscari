@@ -35,8 +35,8 @@ int** alloc_player_deck_memory (int);                       // Data la dimension
                                                             // l'array bidimensionale (tiles del player nell'indice 0 e 1)
                                                             // RICORDARSI di liberare adeguatamente la memoria dopo l'utilizzo e prima di terminare il programma.
 
-// processAI (array, dimensione array, indice tessera iniziale)
-int* processAI (int**, int, int);                           // Funzione che processa i tiles del player e restituisce una stringa con i tiles da giocare.
+// processAI (array, dimensione array, indice tessera iniziale, puntatore a variabile che conterrà la dimensione dell'array di output)
+int* processAI (int**, int, int, int*);                     // Funzione che processa i tiles del player e restituisce una stringa con i tiles da giocare.
                                                             // RICORDARSI di liberare adeguatamente la memoria dopo l'utilizzo e prima di terminare il programma.
 
 // LE SEGUENTI SONO FUNZIONI CHE VANNO USATE SOLO QUANDO IL PROGRAMMA VIENE LANCIATO CON IL PARAMETRO --challenge
