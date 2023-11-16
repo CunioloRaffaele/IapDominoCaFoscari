@@ -47,7 +47,17 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
 
     while (!is2dArrayEmpty(deckCopy, deckDimension)) {
         // Salviamo la seconda faccia dell'ultima tessera valutata
-        int latestCard1Face = deckCopy[indexInOrder[*numbersOfElementsIndexInOrder - 1]][1];
+        int indexOfLatestCard = indexInOrder[*numbersOfElementsIndexInOrder - 1];
+        // Gestiamo il caso in cui l'ultima tessera valutata è stata girata (quindi il caso in cui l'indice è negativo)
+        int latestCard1Face;
+        if (indexOfLatestCard < 0) {
+            indexOfLatestCard = -indexOfLatestCard;
+            // Dobbiamo considerare la prima faccia della tessera
+            latestCard1Face = deck[indexOfLatestCard][0];
+        } else {
+            // Dobbiamo considerare la seconda faccia della tessera
+            latestCard1Face = deck[indexOfLatestCard][1];
+        }
         // Confronta la seconda faccia dell'ultima tessera con le altre tessere in deckCopy
         for (int rowCounter = 0; rowCounter < deckDimension; rowCounter++) {
             if (deckCopy[rowCounter][0] == latestCard1Face) {
