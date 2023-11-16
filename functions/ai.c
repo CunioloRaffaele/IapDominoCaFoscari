@@ -76,6 +76,9 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
                 deckCopy[rowCounter][1] = 0;
                 // Aggiorniamo il counter di elementi in ordine
                 *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
+            } else {
+                // Se non esiste nessuna tessera compatibile con quella precedente break
+                break;
             }
         }
     }
@@ -91,6 +94,7 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
     if (indexInOrder == NULL) {
         exit(1);
     }
+
     // Ritorniamo l'array contenente gli indici in ordine dell'array deck passato in argomento alla funzione
     return indexInOrder;
 }
