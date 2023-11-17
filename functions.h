@@ -5,6 +5,7 @@
 #include "functions/intro_message.c"
 #include "functions/tiles_generator.c"
 #include "functions/ai.c"
+#include "functions/challengeHandler.c"
 
 void introMessage ();                                       // Questa funzione mostra la "grafica testuale" di avvio programma.
                                                             // Funzione implementata per rendere più leggibile il main().
@@ -40,3 +41,7 @@ int* processAI (int**, int, int, int*);                     // Funzione che proc
                                                             // RICORDARSI di liberare adeguatamente la memoria dopo l'utilizzo e prima di terminare il programma.
 
 // LE SEGUENTI SONO FUNZIONI CHE VANNO USATE SOLO QUANDO IL PROGRAMMA VIENE LANCIATO CON IL PARAMETRO --challenge
+
+// is2dArrayEmpty (array playerDeck, array risultato Ai, int dimensione array risultato ai)
+void printCardsForChallenge (int **, int*, int);            // Questa funzione, preso l'array contenente gli indici delle tiles ordinate, cerca la tile corrispondente 
+                                                            // nel deck e le stampa nel corretto ordine
