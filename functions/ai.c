@@ -46,20 +46,20 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
     *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
 
     while (!is2dArrayEmpty(deckCopy, deckDimension)) {
-        // Salviamo la seconda faccia dell'ultima tessera valutata
-        int indexOfLatestCard = indexInOrder[*numbersOfElementsIndexInOrder - 1];
-        // Gestiamo il caso in cui l'ultima tessera valutata è stata girata (quindi il caso in cui l'indice è negativo)
-        int latestCard1Face;
-        if (indexOfLatestCard < 0) {
-            indexOfLatestCard = -indexOfLatestCard;
-            // Dobbiamo considerare la prima faccia della tessera
-            latestCard1Face = deck[indexOfLatestCard][0];
-        } else {
-            // Dobbiamo considerare la seconda faccia della tessera
-            latestCard1Face = deck[indexOfLatestCard][1];
-        }
         // Confronta la seconda faccia dell'ultima tessera con le altre tessere in deckCopy
         for (int rowCounter = 0; rowCounter < deckDimension; rowCounter++) {
+            // Salviamo la seconda faccia dell'ultima tessera valutata
+            int indexOfLatestCard = indexInOrder[*numbersOfElementsIndexInOrder - 1];
+            // Gestiamo il caso in cui l'ultima tessera valutata è stata girata (quindi il caso in cui l'indice è negativo)
+            int latestCard1Face;
+            if (indexOfLatestCard < 0) {
+                indexOfLatestCard = -indexOfLatestCard;
+                // Dobbiamo considerare la prima faccia della tessera
+                latestCard1Face = deck[indexOfLatestCard][0];
+            } else {
+                // Dobbiamo considerare la seconda faccia della tessera
+                latestCard1Face = deck[indexOfLatestCard][1];
+            }
             if (deckCopy[rowCounter][0] == latestCard1Face) {
                 // Se la tessera è compatibile la aggiungiamo all'array indexInOrder
                 indexInOrder[*numbersOfElementsIndexInOrder] = rowCounter;

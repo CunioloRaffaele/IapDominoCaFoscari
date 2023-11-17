@@ -61,7 +61,7 @@ void challengeMode () {
         printf("%d - Risultato Ai: %d \n", counter, AiResult[counter]);
     }
 
-    //printCardsForChallenge(playerDeck, AiResult, processAIDimension);
+    printCardsForChallenge(playerDeck, AiResult, processAIDimension);
 
     // Free della memoria allocata all'array contenente il risultato dell'ai
     free (AiResult);

@@ -6,7 +6,7 @@ void printCardsForChallenge(int** playerDeck, int* AiResult, int processAIDimens
     bool isFirst = true;
     for (int i = 0; i < processAIDimension; i++) {
         if (AiResult[i] < 0) {
-            int index = -AiResult[i];
+            int index = - AiResult[i];
             if (isFirst) {
                 printf("S ");
                 printf("%d %d ", playerDeck[index][1], playerDeck[index][0]);
@@ -19,7 +19,7 @@ void printCardsForChallenge(int** playerDeck, int* AiResult, int processAIDimens
             int index = AiResult[i];
             if (isFirst) {
                 printf("S ");
-                printf("%d %d ", playerDeck[index][1], playerDeck[index][0]);
+                printf("%d %d ", playerDeck[index][0], playerDeck[index][1]);
                 isFirst = false;
             } else {
                 printf("R ");
