@@ -13,7 +13,7 @@ void printCardsForChallenge(int** playerDeck, int* AiResult, int processAIDimens
                 isFirst = false;
             } else {
                 printf("R ");
-                printf("%d %d ", playerDeck[index][1], playerDeck[AiResult[i]][0]);
+                printf("%d %d ", playerDeck[index][1], playerDeck[index][0]);
             }
         } else {
             int index = AiResult[i];
