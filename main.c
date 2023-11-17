@@ -1,3 +1,5 @@
+// 901146 903407 902939 902406
+
 // Compila il programma con "make run"
 
 #include <stdio.h>
@@ -56,10 +58,6 @@ void challengeMode () {
     }
     int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
     int* AiResult = processAI(playerDeck, deckDimension, 0, &processAIDimension);
-    printf("processAiDimension: %d\n", processAIDimension);
-    for (int counter = 0; counter < processAIDimension; counter ++) {
-        printf("%d - Risultato Ai: %d \n", counter, AiResult[counter]);
-    }
 
     printCardsForChallenge(playerDeck, AiResult, processAIDimension);
 
