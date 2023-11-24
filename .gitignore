@@ -9,3 +9,4 @@ dominoIlC
 main
 *.json
 *.plist
+*.code-workspace

@@ -25,10 +25,13 @@ int screen_col ();                                          // Ritorna dimension
 // spawn_screen_with_title (titolo)
 void spawn_screen_with_title (char[]);                      // Crea la schermata con un titolo sovrastante e sposta il cursore alla coordinata corretta
 
-// spawn_tile (numero top, numero bottom)
-void spawn_tile (int, int);                                 // Genera una tile ascii art.
+// spawn_tile (numero top, numero bottom, colonna)
+void spawn_tile (int, int, int);                            // Genera una tile ascii art e la posizione in una coordinata nel terminale.
+                                                            // una tile è composta da due numeri (top e bottom) e una colonna di posizionamento.
+                                                            // La tile occupa 18 colonne (18 caratteri su ogni riga)
+                                                            // Al termine dell'esecuzione il cursore (collocato nel posto in cui sarebbe da stampare una nuova tile)  va  mandato a capo con \n
 
-// generate_tiles_composition (array)
+// generate_tiles_composition (array)           
 void generate_tiles_composition (int[20][2]);               // Genera 21 tessere, ciascuna con una coppia di numeri da 1 a 6.
 
 // alloc_player_deck_memory (dimensione array)

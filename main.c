@@ -27,10 +27,9 @@ void menuUi () {
     {
     case 1:
         spawn_screen_with_title("21 TESSERE");
-        for (int counter = 0; counter <= 20; counter ++) {
-            printf("(%d , ", gameSet [counter][0]);
-            printf("%d) \n", gameSet [counter][1]);
-            spawn_tile(gameSet[counter][0], gameSet[counter][1]);
+        
+        for (int counter = 0; counter <= 3; counter ++) {
+            spawn_tile(gameSet[counter][0], gameSet[counter][1], 18*counter);
         }
         sleep(10);
         menuUi();
