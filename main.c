@@ -21,23 +21,24 @@ void menuUi () {
     printf("| 2      -  Ottieni un numero N di tiles\n");
     printf("| 3      -  Visualizza le tue tiles\n");
     printf("| Altro  -  Esci\n");
-    printf("\n\n Seleziona un'opzione tra le presentate: ");
-    scanf("%d", &menuOption);
+    printf("\n\n Seleziona un'opzione tra le presentate digitando il numero corrispondente");
+    //scanf("%d", &menuOption);
+    menuOption = getch();
     switch (menuOption)
     {
-    case 1:
+    case ASCII_1:
         spawn_screen_with_title("21 TESSERE");
-        
+
         for (int counter = 0; counter <= 3; counter ++) {
-            spawn_tile(gameSet[counter][0], gameSet[counter][1], 18*counter);
+            spawn_tile(gameSet[counter][0], gameSet[counter][1], 18*counter, true);
         }
         sleep(10);
         menuUi();
         break;
-    case 2:
+    case ASCII_2:
         spawn_screen_with_title("OTTIENI TILES");
         break;
-    case 3:
+    case ASCII_3:
         spawn_screen_with_title("I MIEI TILES");
         break;
     default:

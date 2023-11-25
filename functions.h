@@ -3,7 +3,7 @@
 #include "functions/initialization.c"
 #include "functions/terminal_handler.c"
 #include "functions/intro_message.c"
-#include "functions/tiles_generator.c"
+#include "functions/tiles_ui_handler.c"
 #include "functions/ai.c"
 #include "functions/challengeHandler.c"
 
@@ -22,11 +22,19 @@ int screen_row ();                                          // Ritorna dimension
 
 int screen_col ();                                          // Ritorna dimensione terminale (col)
 
+int getch ();                                               // Questa funzione disabilita la modalità canonica e la modalità echo del terminale, consentendo
+                                                            // al programma di leggere un singolo carattere senza attendere un newline e senza
+                                                            // visualizzare il carattere sul terminale. 
+                                                            // Su Unix-like tilizza la libreria termios.h per modificare temporaneamente gli attributi del terminale.
+                                                            // Su Windows utilizza la funzione getch() della libreria conio.h
+                                                            // Viene ritornato il valore ascii del carattere letto.
+                                                            // Nella funzioni ci sono le costanti dei valori ascii da usare nel programma.
+
 // spawn_screen_with_title (titolo)
 void spawn_screen_with_title (char[]);                      // Crea la schermata con un titolo sovrastante e sposta il cursore alla coordinata corretta
 
-// spawn_tile (numero top, numero bottom, colonna)
-void spawn_tile (int, int, int);                            // Genera una tile ascii art e la posizione in una coordinata nel terminale.
+// spawn_tile (numero top, numero bottom, colonna, is selected)
+void spawn_tile (int, int, int, bool);                            // Genera una tile ascii art e la posizione in una coordinata nel terminale.
                                                             // una tile è composta da due numeri (top e bottom) e una colonna di posizionamento.
                                                             // La tile occupa 18 colonne (18 caratteri su ogni riga)
                                                             // Al termine dell'esecuzione il cursore (collocato nel posto in cui sarebbe da stampare una nuova tile)  va  mandato a capo con \n

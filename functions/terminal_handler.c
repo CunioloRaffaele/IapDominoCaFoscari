@@ -9,26 +9,56 @@
 #elif __APPLE__ || __linux__ || __unix__                                        // MacOs + Linux
     #include <sys/ioctl.h>
     #include <unistd.h>
+    #include <termios.h>
 #endif
+
+#define ASCII_1 49
+#define ASCII_2 50
+#define ASCII_3 51
+#define ASCII_4 52
+#define ASCII_5 53
+#define ASCII_6 54
+#define ASCII_7 55
+#define ASCII_8 56
+#define ASCII_9 57
+#define ASCII_0 48
+#define ASCII_A 65
+#define ASCII_D 68
+int getch() {
+
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+        return _getch();
+    #elif __APPLE__ || __linux__ || __unix__                                        // MacOs + Linux
+        struct termios oldattr, newattr;
+        int ch;
+        tcgetattr(STDIN_FILENO, &oldattr);
+        newattr = oldattr;
+        newattr.c_lflag &= ~(ICANON | ECHO);
+        tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
+        ch = getchar();
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
+        return ch;
+    #endif
+}
 
 void colorzz(int color) {
     #if __APPLE__ || __linux__ || __unix__ // MacOs + Linux
         switch (color)
         {
         case 0:
-            printf("\033[0m\n");
+            printf("\033[0m");
             break;
         case 1:
-            printf("\033[31m\n");
+            printf("\033[31m");
             break;
         case 2:
-            printf("\033[32m\n");
+            printf("\033[32m");
             break;
         case 3:
-            printf("\033[34m\n");
+            printf("\033[34m");
             break;
         case 4:
-            printf("\033[37m\n");
+            printf("\033[37m");
             break;
         default:
             break;
