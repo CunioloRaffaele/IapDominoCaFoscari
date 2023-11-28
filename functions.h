@@ -30,11 +30,11 @@ int getch ();                                               // Questa funzione d
                                                             // Viene ritornato il valore ascii del carattere letto.
                                                             // Nella funzioni ci sono le costanti dei valori ascii da usare nel programma.
 
-// spawn_screen_with_title (titolo)
-void spawn_screen_with_title (char[]);                      // Crea la schermata con un titolo sovrastante e sposta il cursore alla coordinata corretta
+// spawn_screen_with_title (titolo, animation)
+void spawn_screen_with_title (char[], bool);                // Crea la schermata con un titolo sovrastante e sposta il cursore alla coordinata corretta
 
 // spawn_tile (numero top, numero bottom, colonna, is selected)
-void spawn_tile (int, int, int, bool);                            // Genera una tile ascii art e la posizione in una coordinata nel terminale.
+void spawn_tile (int, int, int, bool);                      // Genera una tile ascii art e la posizione in una coordinata nel terminale.
                                                             // una tile è composta da due numeri (top e bottom) e una colonna di posizionamento.
                                                             // La tile occupa 18 colonne (18 caratteri su ogni riga)
                                                             // Al termine dell'esecuzione il cursore (collocato nel posto in cui sarebbe da stampare una nuova tile)  va  mandato a capo con \n

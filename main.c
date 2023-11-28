@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "functions.h"
+#include "fragments.h"
 
 // Creiamo un array multidimensionale per contenere le 21 tessere possibili ciascuna con una coppia di numeri da 1 a 6.
 // L'array contiene 20 tessere che hanno ciascuna due facce (top bottom nella funzione 'spawn_tile')
@@ -14,7 +15,7 @@ int gameSet [20][2];
 int **playerDeck;
 
 void menuUi () {
-    spawn_screen_with_title("MENU");
+    spawn_screen_with_title("MENU", true);
     int menuOption;
     colorzz(2);
     printf("| 1      -  Visualizza i possibili tiles che ti potrebbero essere asegnati\n");
@@ -27,19 +28,13 @@ void menuUi () {
     switch (menuOption)
     {
     case ASCII_1:
-        spawn_screen_with_title("21 TESSERE");
-
-        for (int counter = 0; counter <= 3; counter ++) {
-            spawn_tile(gameSet[counter][0], gameSet[counter][1], 18*counter, true);
-        }
-        sleep(10);
-        menuUi();
+        fragment1(gameSet, 0);
         break;
     case ASCII_2:
-        spawn_screen_with_title("OTTIENI TILES");
+        spawn_screen_with_title("OTTIENI TILES", true);
         break;
     case ASCII_3:
-        spawn_screen_with_title("I MIEI TILES");
+        spawn_screen_with_title("I MIEI TILES", true);
         break;
     default:
         break;
@@ -89,9 +84,9 @@ int main(int argc, char* argv[]) {
 
     // Menu
     menuUi();
-
+/*
     clear_console();
     introMessage();
-    printf("\n\nGrazie per aver usato Domino\n\n");
+    printf("\n\nGrazie per aver usato Domino\n\n");*/
     return 0;
 }

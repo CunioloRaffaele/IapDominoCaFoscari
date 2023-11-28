@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
     #include <windows.h>
     #include <conio.h>
@@ -22,8 +23,8 @@
 #define ASCII_8 56
 #define ASCII_9 57
 #define ASCII_0 48
-#define ASCII_A 65
-#define ASCII_D 68
+#define ASCII_A 97
+#define ASCII_D 100
 int getch() {
 
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
@@ -102,38 +103,41 @@ int screen_col() {
         return 0;
 }
 
-void spawn_screen_with_title(char title[]) {
+void spawn_screen_with_title(char title[], bool animation) {
     int col = screen_col();
     int row = screen_row();
     int title_len = strlen(title);
+    clear_console();
     colorzz(3);
-    for (int t = 0; t < 5; t++) {
-        for (int c = 0; c < row; c++) {
-            for (int d = 0; d < col; d++) {
-                switch (t) {
-                case 0:
-                    printf("!");
-                    break;
-                case 1:
-                    printf("-");
-                    break;
-                case 2:
-                    printf(":");
-                    break;
-                case 3:
-                    printf("?");
-                    break;
-                case 4:
-                    printf("=");
-                    break;
-                default:
-                    break;
+    if (animation) {
+        for (int t = 0; t < 5; t++) {
+            for (int c = 0; c < row; c++) {
+                for (int d = 0; d < col; d++) {
+                    switch (t) {
+                    case 0:
+                        printf("!");
+                        break;
+                    case 1:
+                        printf("-");
+                        break;
+                    case 2:
+                        printf(":");
+                        break;
+                    case 3:
+                        printf("?");
+                        break;
+                    case 4:
+                        printf("=");
+                        break;
+                    default:
+                        break;
+                    }
                 }
+                printf("\n");
             }
-            printf("\n");
+            usleep(80000);
+            clear_console();
         }
-        usleep(80000);
-        clear_console();
     }
     for (int c = 0; c < col; c++) {
         printf("-");
@@ -143,7 +147,7 @@ void spawn_screen_with_title(char title[]) {
         printf("-");
     }
     printf(" %s ", title);
-    for (int c = 0; c < ((col / 2) - (title_len / 2) - 2); c++) {
+    for (int c = 0; c < ((col / 2) - (title_len / 2) - 1); c++) {
         printf("-");
     }
     printf("\n");
