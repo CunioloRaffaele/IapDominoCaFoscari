@@ -72,7 +72,6 @@ void colorzz(int color) {
         default:
             break;
         }
-        SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
     #elif  __APPLE__ || __linux__ || __unix__ // MacOs + Linux
         switch (color) {
         case 0:
