@@ -67,7 +67,7 @@ void colorzz(int color) {
             SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
             break;
         case 4:
-            SetConsoleTextAttribute(hConsole, FOREGROUND_WHITE);
+            SetConsoleTextAttribute(hConsole, saved_attributes);
             break;
         default:
             break;
