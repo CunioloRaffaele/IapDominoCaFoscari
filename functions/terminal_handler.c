@@ -25,6 +25,7 @@
 #define ASCII_0 48
 #define ASCII_A 97
 #define ASCII_D 100
+#define ASCII_Esc 27
 int getch() {
 
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
@@ -43,9 +44,37 @@ int getch() {
 }
 
 void colorzz(int color) {
-    #if __APPLE__ || __linux__ || __unix__ // MacOs + Linux
-        switch (color)
-        {
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+        WORD saved_attributes;
+
+        /* Save current attributes */
+        GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+        saved_attributes = consoleInfo.wAttributes;
+
+        switch (color) {
+        case 0: // Restore to original color attribute
+            SetConsoleTextAttribute(hConsole, saved_attributes);
+            break;
+        case 1:
+            SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+            break;
+        case 2:
+            SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+            break;
+        case 3:
+            SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+            break;
+        case 4:
+            SetConsoleTextAttribute(hConsole, FOREGROUND_WHITE);
+            break;
+        default:
+            break;
+        }
+        SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+    #elif  __APPLE__ || __linux__ || __unix__ // MacOs + Linux
+        switch (color) {
         case 0:
             printf("\033[0m");
             break;
