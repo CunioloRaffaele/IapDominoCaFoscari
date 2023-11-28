@@ -9,6 +9,9 @@
 
 void introMessage ();                                       // Questa funzione mostra la "grafica testuale" di avvio programma.
                                                             // Funzione implementata per rendere più leggibile il main().
+
+void menuUi ();                                             // Questa funzione mostra la schermata di menu.
+                                                            // Funzione implementata per rendere più leggibile il main().
 // generate_player_deck (array, dimensione array)
 void generate_player_deck (int*, int);                      // Crea set di tessere.
 
@@ -40,7 +43,7 @@ void spawn_tile (int, int, int, bool);                      // Genera una tile a
                                                             // Al termine dell'esecuzione il cursore (collocato nel posto in cui sarebbe da stampare una nuova tile)  va  mandato a capo con \n
 
 // generate_tiles_composition (array)           
-void generate_tiles_composition (int[20][2]);               // Genera 21 tessere, ciascuna con una coppia di numeri da 1 a 6.
+void generate_tiles_composition (int[21][2]);               // Genera 21 tessere, ciascuna con una coppia di numeri da 1 a 6.
 
 // alloc_player_deck_memory (dimensione array)
 int** alloc_player_deck_memory (int);                       // Data la dimensione dell'array viene preparata una porzione di memoria che contenga 

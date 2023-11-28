@@ -10,7 +10,7 @@
 // Creiamo un array multidimensionale per contenere le 21 tessere possibili ciascuna con una coppia di numeri da 1 a 6.
 // L'array contiene 20 tessere che hanno ciascuna due facce (top bottom nella funzione 'spawn_tile')
 // Se vuoi conoscere la due facce di tessera devi printare gameSet [indice] [0] e gameSet [indice] [1] 
-int gameSet [20][2];
+int gameSet [21][2];
 // Puntatore di memoria all'array multidimensionale contenente le tessere del giocatore
 int **playerDeck;
 
@@ -18,9 +18,16 @@ void menuUi () {
     spawn_screen_with_title("MENU", true);
     int menuOption;
     colorzz(2);
-    printf("| 1      -  Visualizza i possibili tiles che ti potrebbero essere asegnati\n");
-    printf("| 2      -  Ottieni un numero N di tiles\n");
+    printf("| 1      -  Visualizza i possibili tiles che ti potrebbero essere asegnati \n            (compresi quelli speciali)\n");
+    if (playerDeck == NULL) {
+        printf("| 2      -  Ottieni un numero N di tiles\n");
+        colorzz(1);
+        printf("Le opzioni seguenti non sono attualmente disponibili\nChiama il programma con la flag --challenge o genera un deck con opzione 2.\n");
+    }
     printf("| 3      -  Visualizza le tue tiles\n");
+    printf("| 4      -  Gioca a Domino\n");
+    printf("| 5      -  Gioca a 2D Domino\n\n");
+    colorzz(2);
     printf("| Altro  -  Esci\n");
     printf("\n\n Seleziona un'opzione tra le presentate digitando il numero corrispondente");
     //scanf("%d", &menuOption);
@@ -28,10 +35,12 @@ void menuUi () {
     switch (menuOption)
     {
     case ASCII_1:
-        fragment1(gameSet, 0);
+        fragment1(gameSet, 0, 0, true);
         break;
     case ASCII_2:
-        spawn_screen_with_title("OTTIENI TILES", true);
+        if (playerDeck == NULL) {
+            fragment2(playerDeck, true);
+        }
         break;
     case ASCII_3:
         spawn_screen_with_title("I MIEI TILES", true);

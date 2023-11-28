@@ -16,7 +16,7 @@ void generate_player_deck (int *playerTiles, int arrayDimensions) {
     }
 }
 
-void generate_tiles_composition (int array[20][2]) {
+void generate_tiles_composition (int array[21][2]) {
     int it= 0;
     for (int c = 1; c <= 6; c++) {
         for (int d = c; d <= 6; d++) {
