@@ -12,8 +12,8 @@ void introMessage ();                                       // Questa funzione m
 
 void menuUi ();                                             // Questa funzione mostra la schermata di menu.
                                                             // Funzione implementata per rendere più leggibile il main().
-// generate_player_deck (array, dimensione array)
-void generate_player_deck (int*, int);                      // Crea set di tessere.
+// generate_player_deck (gameset, array, dimensione array)
+void generate_player_deck (int [21][2], int**, int);        // Crea set di tessere.
 
 // colorzz (codice colore)
 void colorzz (int);                                         // Seleziona il colore del terminale (0 reset - 1 rosso - 2 verde - 3 blu - 4 bianco). 
@@ -51,7 +51,7 @@ int** alloc_player_deck_memory (int);                       // Data la dimension
                                                             // RICORDARSI di liberare adeguatamente la memoria dopo l'utilizzo e prima di terminare il programma.
 
 // processAI (array, dimensione array, indice tessera iniziale, puntatore a variabile che conterrà la dimensione dell'array di output)
-int* processAI (int**, int, int, int*);                     // Funzione che processa i tiles del player e restituisce una stringa con i tiles da giocare.
+int* processAI (int**, int, int, int*);                     // Funzione che processa i tiles del player e restituisce un array contenente gli indici in ordine.
                                                             // RICORDARSI di liberare adeguatamente la memoria dopo l'utilizzo e prima di terminare il programma.
 
 // LE SEGUENTI SONO FUNZIONI CHE VANNO USATE SOLO QUANDO IL PROGRAMMA VIENE LANCIATO CON IL PARAMETRO --challenge

@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void fragment2 (int **playerDeck,  bool animation) {
+extern int** playerDeck;
+
+void fragment2 (bool animation, int gameSet[21][2]) {
     spawn_screen_with_title("OTTIENI TILE", animation);
     colorzz(2);
     printf("| 1      -  Ottieni tile\n");
@@ -20,10 +22,13 @@ void fragment2 (int **playerDeck,  bool animation) {
             colorzz(2);
             goto jump;
         } else {
-            playerDeck = alloc_player_deck_memory (deckDimension);
             fflush(stdin);   // Pulisce il buffer di input per evitare che scanf legga caratteri non voluti tipo enter
-            // TODO: Aggiungere la funzione che genera le tiles da assegnare al player randomicamente
-            //       Mettere la funzione in functions/initialization.c
+            playerDeck = alloc_player_deck_memory(deckDimension);
+            generate_player_deck(gameSet, playerDeck, deckDimension);
+            printf("Tiles generate con successo!\n");
+            for (int counter = 0; counter < deckDimension; counter ++) {
+                printf("%d %d\n", playerDeck[counter][0], playerDeck[counter][1]);
+            }
             menuUi();
         }
         break;

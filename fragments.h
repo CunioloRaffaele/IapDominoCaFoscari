@@ -5,4 +5,4 @@
 void fragment1(int[21][2], int, int, bool);
 
 // fragment2 (array bidimensionale, animazione da applicare a spawn_screen_with_title)
-void fragment2(int**, bool);
+void fragment2(bool, int[21][2]);

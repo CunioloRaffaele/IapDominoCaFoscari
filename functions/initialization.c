@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int** alloc_player_deck_memory (int src_size) {
     int **generatedMalloc;
@@ -10,9 +11,28 @@ int** alloc_player_deck_memory (int src_size) {
     return generatedMalloc;
 }
 
-void generate_player_deck (int *playerTiles, int arrayDimensions) {
+void generate_player_deck (int gameSet[21][2], int **deck, int arrayDimensions) {
+    srand ( time(NULL) );
     for (int counter = 0; counter < arrayDimensions; counter++) {
-        *(playerTiles+counter) = 0;
+        // Generiamo un numero randomico tra 0 9 per decidere se mettere una tessera speciale o una normale
+        // (0 - 6) -> tessera normale
+        // (7 - 9) -> tessera speciale 1 = [11 | 11] 2 = [12 | 21] 3 = [0 | 0]
+        int random = rand() % 10;
+        if (random <= 6) {
+            // Generiamo un numero randomico tra 0 e 21
+            int randomTile = rand() % 22;
+            deck[counter][0] = gameSet[randomTile][0];
+            deck[counter][1] = gameSet[randomTile][1];
+        }else if (random == 7) {
+            deck[counter][0] = 11;
+            deck[counter][1] = 11;
+        } else if (random == 8) {
+            deck[counter][0] = 12;
+            deck[counter][1] = 21;
+        } else if (random == 9) {
+            deck[counter][0] = 0;
+            deck[counter][1] = 0;
+        }
     }
 }
 

@@ -23,6 +23,10 @@ void menuUi () {
         printf("| 2      -  Ottieni un numero N di tiles\n");
         colorzz(1);
         printf("Le opzioni seguenti non sono attualmente disponibili\nChiama il programma con la flag --challenge o genera un deck con opzione 2.\n");
+    } else {
+        colorzz(1);
+        printf("| 2      -  Ottieni un numero N di tiles\nOpzione 2 non disponibile in quanto sono già state assegnate le tiles al giocatore.\n");
+        colorzz(2);
     }
     printf("| 3      -  Visualizza le tue tiles\n");
     printf("| 4      -  Gioca a Domino\n");
@@ -39,11 +43,23 @@ void menuUi () {
         break;
     case ASCII_2:
         if (playerDeck == NULL) {
-            fragment2(playerDeck, true);
+            fragment2(true, gameSet);
         }
         break;
     case ASCII_3:
-        spawn_screen_with_title("I MIEI TILES", true);
+        if (playerDeck == NULL) {
+            menuUi();
+        }else {}
+        break;
+    case ASCII_4:
+        if (playerDeck == NULL) {
+            menuUi();
+        }else {}
+        break;
+    case ASCII_5:
+        if (playerDeck == NULL) {
+            menuUi();
+        }else {}
         break;
     default:
         break;
