@@ -28,14 +28,20 @@ void fragment1(int gameSet[20][2], int startingTileIndex, int selectedTileIndex,
     {
     case ASCII_A:
         if (startingTileIndex ==  0) {
-            fragment1(gameSet, 0, selectedTileIndex - 1, false);
+            if ((selectedTileIndex - 1) >= 0) {
+                selectedTileIndex --;
+            }
+            fragment1(gameSet, 0, selectedTileIndex, false);
         } else {
             fragment1(gameSet, startingTileIndex - 1, selectedTileIndex - 1, false);
         }
         break;
     case ASCII_D:
         if ((startingTileIndex + tilesPerScreen) >=  21) {
-            fragment1(gameSet, 21 - tilesPerScreen, selectedTileIndex + 1, false);
+            if ((selectedTileIndex + 1) < 21) {
+                selectedTileIndex ++;
+            }
+            fragment1(gameSet, 21 - tilesPerScreen, selectedTileIndex, false);
         } else {
             fragment1(gameSet, startingTileIndex + 1, startingTileIndex + 1, false);
         }
