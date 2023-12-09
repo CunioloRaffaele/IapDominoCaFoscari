@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
-void fragment1(int gameSet[20][2], int startingTileIndex, int selectedTileIndex, bool animation) {
-    spawn_screen_with_title("21 TESSERE", animation);
+
+void fragment3(int **gameSet, int startingTileIndex, int selectedTileIndex, bool animation, int gameSetDimension) {
+    spawn_screen_with_title("LE TUE TESSERE", animation);
     colorzz(2);
     printf("| A      -  Scorri le tiles a sinistra (una alla volta)\n");
     printf("| D      -  Scorri le tiles a destra (una alla volta)\n");
@@ -26,28 +27,28 @@ void fragment1(int gameSet[20][2], int startingTileIndex, int selectedTileIndex,
     int input = getch();
     switch (input)
     {
-    case ASCII_A:
-        if (startingTileIndex ==  0) {
-            if ((selectedTileIndex - 1) >= 0) {
-                selectedTileIndex --;
+        case ASCII_A:
+            if (startingTileIndex ==  0) {
+                if ((selectedTileIndex - 1) >= 0) {
+                    selectedTileIndex --;
+                }
+                fragment3(gameSet, 0, selectedTileIndex, false, gameSetDimension);
+            } else {
+                fragment3(gameSet, startingTileIndex - 1, selectedTileIndex - 1, false, gameSetDimension);
             }
-            fragment1(gameSet, 0, selectedTileIndex, false);
-        } else {
-            fragment1(gameSet, startingTileIndex - 1, selectedTileIndex - 1, false);
-        }
-        break;
-    case ASCII_D:
-        if ((startingTileIndex + tilesPerScreen) >=  21) {
-            if ((selectedTileIndex + 1) < 21) {
-                selectedTileIndex ++;
+            break;
+        case ASCII_D:
+            if ((startingTileIndex + tilesPerScreen) >= gameSetDimension) {
+                if ((selectedTileIndex + 1) < gameSetDimension) {
+                    selectedTileIndex ++;
+                }
+                fragment3(gameSet, gameSetDimension - tilesPerScreen, selectedTileIndex, false, gameSetDimension);
+            } else {
+                fragment3(gameSet, startingTileIndex + 1, startingTileIndex + 1, false, gameSetDimension);
             }
-            fragment1(gameSet, 21 - tilesPerScreen, selectedTileIndex, false);
-        } else {
-            fragment1(gameSet, startingTileIndex + 1, startingTileIndex + 1, false);
-        }
-        break;
-    default:
-        menuUi();
-        break;
+            break;
+        default:
+            menuUi();
+            break;
     }
 }

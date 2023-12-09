@@ -13,6 +13,7 @@
 int gameSet [21][2];
 // Puntatore di memoria all'array multidimensionale contenente le tessere del giocatore
 int **playerDeck;
+int playerDeckDimension = 0;
 
 void menuUi () {
     spawn_screen_with_title("MENU", true);
@@ -49,7 +50,9 @@ void menuUi () {
     case ASCII_3:
         if (playerDeck == NULL) {
             menuUi();
-        }else {}
+        }else {
+            fragment3(playerDeck, 0, 0, true, playerDeckDimension);
+        }
         break;
     case ASCII_4:
         if (playerDeck == NULL) {
@@ -70,21 +73,20 @@ void menuUi () {
 
 void challengeMode () {
     // Creazione dell'array contenente i tiles del player e inserimento dei dati.
-    int deckDimension = 0;
-    scanf("%d", & deckDimension);
-    int** playerDeck = alloc_player_deck_memory (deckDimension);
-    for (int counter = 0; counter < deckDimension; counter ++) {
+    scanf("%d", & playerDeckDimension);
+    int** playerDeck = alloc_player_deck_memory (playerDeckDimension);
+    for (int counter = 0; counter < playerDeckDimension; counter ++) {
         scanf("%d %d", &playerDeck[counter][0], &playerDeck[counter][1]);
     }
     int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
-    int* AiResult = processAI(playerDeck, deckDimension, 0, &processAIDimension);
+    int* AiResult = processAI(playerDeck, playerDeckDimension, 0, &processAIDimension);
 
     printCardsForChallenge(playerDeck, AiResult, processAIDimension);
 
     // Free della memoria allocata all'array contenente il risultato dell'ai
     free (AiResult);
     // Free della memoria allocata all'array contenente i tiles del player
-    for (int i = 0; i < deckDimension; i++) {
+    for (int i = 0; i < playerDeckDimension; i++) {
         free (playerDeck[i]);
     }
     free (playerDeck);
