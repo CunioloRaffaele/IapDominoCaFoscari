@@ -26,7 +26,7 @@
 #define ASCII_A 97
 #define ASCII_D 100
 #define ASCII_Esc 27
-int getch() {
+int getch(void) {
 
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
         return _getch();
@@ -95,7 +95,7 @@ void colorzz(int color) {
     #endif
 }
 
-void clear_console() {
+void clear_console(void) {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
         system("cls");
     #elif __APPLE__ || __linux__ || __unix__                                        // MacOs + Linux
@@ -103,7 +103,7 @@ void clear_console() {
     #endif
 }
 
-int screen_row() {
+int screen_row(void) {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
         ret = GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
         if (ret) {
@@ -117,7 +117,7 @@ int screen_row() {
         return 0;
 }
 
-int screen_col() {
+int screen_col(void) {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
         ret = GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
         if (ret) {

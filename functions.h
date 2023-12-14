@@ -7,10 +7,10 @@
 #include "functions/ai.c"
 #include "functions/challengeHandler.c"
 
-void introMessage ();                                       // Questa funzione mostra la "grafica testuale" di avvio programma.
+void introMessage (void);                                   // Questa funzione mostra la "grafica testuale" di avvio programma.
                                                             // Funzione implementata per rendere più leggibile il main().
 
-void menuUi ();                                             // Questa funzione mostra la schermata di menu.
+void menuUi (void);                                             // Questa funzione mostra la schermata di menu.
                                                             // Funzione implementata per rendere più leggibile il main().
 // generate_player_deck (gameset, array, dimensione array)
 void generate_player_deck (int [21][2], int**, int);        // Crea set di tessere.
@@ -19,13 +19,13 @@ void generate_player_deck (int [21][2], int**, int);        // Crea set di tesse
 void colorzz (int);                                         // Seleziona il colore del terminale (0 reset - 1 rosso - 2 verde - 3 blu - 4 bianco). 
                                                             // ATTENZIONE VA USATO PRIMA DEL PRINTF DA STAMPARE E DOPO VA RESETTATO CON 0.
                                                             // Non funziona su Windows (stampa solo carattere vuoto) ma solo su Macos e Linux.
-void clear_console ();                                      // Elimina l'intero contenuto della console.
+void clear_console (void);                                  // Elimina l'intero contenuto della console.
 
-int screen_row ();                                          // Ritorna dimensione terminale (row)
+int screen_row (void);                                      // Ritorna dimensione terminale (row)
 
-int screen_col ();                                          // Ritorna dimensione terminale (col)
+int screen_col (void);                                      // Ritorna dimensione terminale (col)
 
-int getch ();                                               // Questa funzione disabilita la modalità canonica e la modalità echo del terminale, consentendo
+int getch (void);                                           // Questa funzione disabilita la modalità canonica e la modalità echo del terminale, consentendo
                                                             // al programma di leggere un singolo carattere senza attendere un newline e senza
                                                             // visualizzare il carattere sul terminale. 
                                                             // Su Unix-like tilizza la libreria termios.h per modificare temporaneamente gli attributi del terminale.

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // TODO aggiungere nomi vicino a matricola
-void introMessage()
+void introMessage(void)
 {
     char asciiArtString[] =
         "           88                                88                          \n"

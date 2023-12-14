@@ -16,7 +16,7 @@ void generate_player_deck (int gameSet[21][2], int **deck, int arrayDimensions) 
     for (int counter = 0; counter < arrayDimensions; counter++) {
         // Generiamo un numero randomico tra 0 9 per decidere se mettere una tessera speciale o una normale
         // (0 - 6) -> tessera normale
-        // (7 - 9) -> tessera speciale 1 = [11 | 11] 2 = [12 | 21] 3 = [0 | 0]
+        // (7 - 9) -> tessera speciale 7 = [11 | 11] 8 = [12 | 21] 9 = [0 | 0]
         int random = rand() % 10;
         if (random <= 6) {
             // Generiamo un numero randomico tra 0 e 21

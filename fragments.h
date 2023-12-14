@@ -8,5 +8,5 @@ void fragment1(int[21][2], int, int, bool);
 // fragment2 (array bidimensionale, animazione da applicare a spawn_screen_with_title)
 void fragment2(bool, int[21][2]);
 
-// fragment3 (array, indice tessera iniziale, indice tessera selezionata, animazione da applicare a spawn_screen_with_title)
+// fragment3 (array, indice tessera iniziale, indice tessera selezionata, animazione da applicare a spawn_screen_with_title, dimensione dell'array)
 void fragment3(int**, int, int, bool, int);

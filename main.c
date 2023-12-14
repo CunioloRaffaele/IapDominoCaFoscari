@@ -15,7 +15,7 @@ int gameSet [21][2];
 int **playerDeck;
 int playerDeckDimension = 0;
 
-void menuUi () {
+void menuUi (void) {
     spawn_screen_with_title("MENU", true);
     int menuOption;
     colorzz(2);
@@ -71,7 +71,7 @@ void menuUi () {
     colorzz(0);
 }
 
-void challengeMode () {
+void challengeMode (void) {
     // Creazione dell'array contenente i tiles del player e inserimento dei dati.
     scanf("%d", & playerDeckDimension);
     int** playerDeck = alloc_player_deck_memory (playerDeckDimension);
