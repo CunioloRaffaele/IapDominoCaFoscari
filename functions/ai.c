@@ -33,16 +33,21 @@ int getIndexOfWildcard (int** deck, int deckDimension, int wildcard0, int wildca
 
 // Questa funzione serve per applicare gli effetti delle carte speciali sull'array.
 // Viene restituito un nuovo array che contiene le tessere del giocatore con le carte speciali applicate.
-int** arrayParser (int **deck, int deckDimension, int *indexInOrder, int numbersOfElementsIndexInOrder) {
+int** arrayParser (int **deck, int *indexInOrder, int numbersOfElementsIndexInOrder) {
     int** unparsedDeck = alloc_player_deck_memory(numbersOfElementsIndexInOrder);
     int** parsedDeck =   alloc_player_deck_memory(numbersOfElementsIndexInOrder);
     // Copiamo i valori di deck in unparsedDeck con indexInOrder
     for (int i = 0; i < numbersOfElementsIndexInOrder; i++) {
-        unparsedDeck[i][0] = deck[indexInOrder[i]][0];
-        unparsedDeck[i][1] = deck[indexInOrder[i]][1];
+        if (indexInOrder[i] < 0) {
+            unparsedDeck[i][0] = deck[-indexInOrder[i]][1];
+            unparsedDeck[i][1] = deck[-indexInOrder[i]][0];
+        }else {
+            unparsedDeck[i][0] = deck[indexInOrder[i]][0];
+            unparsedDeck[i][1] = deck[indexInOrder[i]][1];
+        }
     }
     // Copiamo i valori di unparsedDeck in parsedDeck e modifichiamoli in base alle tessere speciali
-    for (int counterDeckPosition = 0; counterDeckPosition < deckDimension; counterDeckPosition++) {
+    for (int counterDeckPosition = 0; counterDeckPosition < numbersOfElementsIndexInOrder; counterDeckPosition++) {
 
         // Gestione tessera speciale [11 | 11] (tutte le tessere precedenti vengono incrementate di 1 e la tessera speciale viene sostituita con la seconda faccia della precedente)
         if (unparsedDeck[counterDeckPosition][0] == 11 && unparsedDeck[counterDeckPosition][1] == 11) {
@@ -128,36 +133,158 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
 
     while (!is2dArrayEmpty(deckCopy, deckDimension)) {
         // Confronta la seconda faccia dell'ultima tessera con le altre tessere in deckCopy
-        for (int rowCounter = 0; rowCounter < deckDimension; rowCounter++) {
+        for (int rowCounter = 1; rowCounter < deckDimension; rowCounter++) {
             // Salviamo la seconda faccia dell'ultima tessera valutata
             int indexOfLatestCard = indexInOrder[*numbersOfElementsIndexInOrder - 1];
             // Gestiamo il caso in cui l'ultima tessera valutata è stata girata (quindi il caso in cui l'indice è negativo)
             int latestCard1Face;
             if (indexOfLatestCard < 0) {
-                indexOfLatestCard = -indexOfLatestCard;
                 // Dobbiamo considerare la prima faccia della tessera
-                latestCard1Face = deck[indexOfLatestCard][0];
+                latestCard1Face = deck[-indexOfLatestCard][0];
             } else {
                 // Dobbiamo considerare la seconda faccia della tessera
-                latestCard1Face = deck[indexOfLatestCard][1];
+                int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder);
+                latestCard1Face = temp[*numbersOfElementsIndexInOrder - 1][1];
             }
+            // Verifichiamo se abbiamo tessere speciali disponibili
+            int index00 = getIndexOfWildcard(deckCopy, deckDimension, 0, 0);
+            int index1111 = getIndexOfWildcard(deckCopy, deckDimension, 11, 11);
+            int index1221 = getIndexOfWildcard(deckCopy, deckDimension, 12, 21);
+            int sumOf00 = 0;
+            int sumOf1111 = 0;
+            int sumOf1221 = 0;
+            int sumOfMatch = 0;
+            int maxSum = 0;
+            int indexOfMaxSum = 0;
+
             if (deckCopy[rowCounter][0] == latestCard1Face) {
-                // Se la tessera è compatibile la aggiungiamo all'array indexInOrder
+                // Se la tessera è compatibile abbiamo 2 opzioni:
+                // - la aggiungiamo all'array indexInOrder
+                // - valutiamo la possibilità di aggiungere all'array indexInOrder una tessera speciale se dipsonibile
+                if (index00 > 0) {
+                    indexInOrder[*numbersOfElementsIndexInOrder] = index00;
+                    int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder+1);
+                    sumOf00 = getSumOfArray(temp, *numbersOfElementsIndexInOrder+1);
+                    for (int i = 0; i < *numbersOfElementsIndexInOrder+1; i++) {
+                        free (temp[i]);
+                    }
+                    free (temp);
+                    if (sumOf00 > maxSum) {
+                        maxSum = sumOf00;
+                        indexOfMaxSum = index00;
+                    }
+                }
+                if (index1111 > 0) {
+                    indexInOrder[*numbersOfElementsIndexInOrder] = index1111;
+                    int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder+1);
+                    sumOf1111 = getSumOfArray(temp, *numbersOfElementsIndexInOrder+1);
+                    for (int i = 0; i < *numbersOfElementsIndexInOrder+1; i++) {
+                        free (temp[i]);
+                    }
+                    free (temp);
+                    if (sumOf1111 > maxSum) {
+                        maxSum = sumOf1111;
+                        indexOfMaxSum = index1111;
+                    }
+                }
+                if (index1221 > 0) {
+                    indexInOrder[*numbersOfElementsIndexInOrder] = index1221;
+                    int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder+1);
+                    sumOf1221 = getSumOfArray(temp, *numbersOfElementsIndexInOrder+1);
+                    for (int i = 0; i < *numbersOfElementsIndexInOrder+1; i++) {
+                        free (temp[i]);
+                    }
+                    free (temp);
+                    if (sumOf1221 > maxSum) {
+                        maxSum = sumOf1221;
+                        indexOfMaxSum = index1221;
+                    }
+                }
                 indexInOrder[*numbersOfElementsIndexInOrder] = rowCounter;
+                int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder+1);
+                sumOfMatch = getSumOfArray(temp, *numbersOfElementsIndexInOrder+1);
+                for (int i = 0; i < *numbersOfElementsIndexInOrder+1; i++) {
+                    free (temp[i]);
+                }
+                free (temp);
+                if (sumOfMatch > maxSum) {
+                    maxSum = sumOfMatch;
+                    indexOfMaxSum = rowCounter;
+                }
+
+                indexInOrder[*numbersOfElementsIndexInOrder] = indexOfMaxSum;
                 // Rimuoviamo la tessera dal deck
-                deckCopy[rowCounter][0] = 666;
-                deckCopy[rowCounter][1] = 666;
+                deckCopy[indexOfMaxSum][0] = 666;
+                deckCopy[indexOfMaxSum][1] = 666;
                 // Aggiorniamo il counter di elementi in ordine
                 *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
+
             } else if (deckCopy[rowCounter][1] == latestCard1Face) {
-                // Se la tessera è compatibile la aggiungiamo all'array indexInOrder invertendola (aggiungendo - all'indice)
-                indexInOrder[*numbersOfElementsIndexInOrder] = -rowCounter;
+                // Se la tessera è compatibile abbiamo 2 opzioni:
+                // - la aggiungiamo all'array indexInOrder
+                // - valutiamo la possibilità di aggiungere all'array indexInOrder una tessera speciale se dipsonibile
+                if (index00 > 0) {
+                    indexInOrder[*numbersOfElementsIndexInOrder] = index00;
+                    int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder+1);
+                    sumOf00 = getSumOfArray(temp, *numbersOfElementsIndexInOrder+1);
+                    for (int i = 0; i < *numbersOfElementsIndexInOrder+1; i++) {
+                        free (temp[i]);
+                    }
+                    free (temp);
+                    if (sumOf00 > maxSum) {
+                        maxSum = sumOf00;
+                        indexOfMaxSum = index00;
+                    }
+                }
+                if (index1111 > 0) {
+                    indexInOrder[*numbersOfElementsIndexInOrder] = index1111;
+                    int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder+1);
+                    sumOf1111 = getSumOfArray(temp, *numbersOfElementsIndexInOrder+1);
+                    for (int i = 0; i < *numbersOfElementsIndexInOrder+1; i++) {
+                        free (temp[i]);
+                    }
+                    free (temp);
+                    if (sumOf1111 > maxSum) {
+                        maxSum = sumOf1111;
+                        indexOfMaxSum = index1111;
+                    }
+                }
+                if (index1221 > 0) {
+                    indexInOrder[*numbersOfElementsIndexInOrder] = index1221;
+                    int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder+1);
+                    sumOf1221 = getSumOfArray(temp, *numbersOfElementsIndexInOrder+1);
+                    for (int i = 0; i < *numbersOfElementsIndexInOrder+1; i++) {
+                        free (temp[i]);
+                    }
+                    free (temp);
+                    if (sumOf1221 > maxSum) {
+                        maxSum = sumOf1221;
+                        indexOfMaxSum = index1221;
+                    }
+                }
+                indexInOrder[*numbersOfElementsIndexInOrder] = rowCounter;
+                int** temp = arrayParser(deck, indexInOrder, *numbersOfElementsIndexInOrder+1);
+                sumOfMatch = getSumOfArray(temp, *numbersOfElementsIndexInOrder+1);
+                for (int i = 0; i < *numbersOfElementsIndexInOrder+1; i++) {
+                    free (temp[i]);
+                }
+                free (temp);
+                if (sumOfMatch > maxSum) {
+                    maxSum = sumOfMatch;
+                    indexOfMaxSum = rowCounter;
+                }
+
+                indexInOrder[*numbersOfElementsIndexInOrder] = -indexOfMaxSum;
                 // Rimuoviamo la tessera dal deck
-                deckCopy[rowCounter][0] = 666;
-                deckCopy[rowCounter][1] = 666;
+                deckCopy[indexOfMaxSum][0] = 666;
+                deckCopy[indexOfMaxSum][1] = 666;
                 // Aggiorniamo il counter di elementi in ordine
                 *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
+
             } else {
+
+                // TODO: Gestire il caso in cui non ci sono tessere compatibili
+
                 // Se la tessera non è un match con la precedente faccia rimuovo deckCopy[rowCounter][0] e deckCopy[rowCounter][1]
                 deckCopy[rowCounter][0] = 666;
                 deckCopy[rowCounter][1] = 666;
@@ -176,7 +303,35 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
     if (indexInOrder == NULL) {
         exit(1);
     }
+    /*
+    int wildcard = getIndexOfWildcard(deck, deckDimension, 0, 0);
+    printf("Wildcard %d\n", wildcard);
+    int test[6] = {0,1,2,3,4,5};
+    int** te = arrayParser(deck, test, deckDimension);
+    for (int i = 0; i < deckDimension; i++) {
+        printf("Array Parser %d %d\n", te[i][0], te[i][1]);
+    }
+    int summmm = getSumOfArray(te, *numbersOfElementsIndexInOrder);
+    printf("Sum %d\n", summmm);*/
+
 
     // Ritorniamo l'array contenente gli indici in ordine dell'array deck passato in argomento alla funzione
     return indexInOrder;
+}
+
+int AiEvaluation (int** deck, int deckDimension) {
+    int numbersOfElementsIndexInOrder;
+    int maxSum = 0;
+    int result = 0;
+    for (int counter = 0; counter < deckDimension; counter++) {
+        printf("Counter %d\n", counter);
+        int* partialResult = processAI(deck, deckDimension, counter, &numbersOfElementsIndexInOrder);
+        int** parsedArray = arrayParser(deck, partialResult, deckDimension);
+        int partialSum = getSumOfArray(parsedArray, numbersOfElementsIndexInOrder);
+        if (maxSum < partialSum) {
+            maxSum = partialSum;
+            result = counter;
+        }
+    }
+    return result;
 }

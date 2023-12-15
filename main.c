@@ -78,6 +78,7 @@ void challengeMode (void) {
     for (int counter = 0; counter < playerDeckDimension; counter ++) {
         scanf("%d %d", &playerDeck[counter][0], &playerDeck[counter][1]);
     }
+    //int bestStartingTile = AiEvaluation(playerDeck, playerDeckDimension);
     int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
     int* AiResult = processAI(playerDeck, playerDeckDimension, 0, &processAIDimension);
 

@@ -54,6 +54,9 @@ int** alloc_player_deck_memory (int);                       // Data la dimension
 int* processAI (int**, int, int, int*);                     // Funzione che processa i tiles del player e restituisce un array contenente gli indici in ordine.
                                                             // RICORDARSI di liberare adeguatamente la memoria dopo l'utilizzo e prima di terminare il programma.
 
+// AiEvaluation (array, dimensione array)
+int AiEvaluation (int**, int);
+
 // LE SEGUENTI SONO FUNZIONI CHE VANNO USATE SOLO QUANDO IL PROGRAMMA VIENE LANCIATO CON IL PARAMETRO --challenge
 
 // is2dArrayEmpty (array playerDeck, array risultato Ai, int dimensione array risultato ai)
