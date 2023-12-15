@@ -13,9 +13,9 @@
 # Compilazione
 Il codice deve compilare con il comando
 ```sh
-gcc -O2 -std=c99 --pedantic *.c -o iap.
+gcc -O2 -std=c99 --pedantic *.c -o iap.exe
 ```
 Sarà inoltre possibile invocare l'eseguibile con il parametro, che abilita  abilita la consegna per le challenge
 ```sh
-./iap --challenge
+.\iap.exe --challenge
 ```
