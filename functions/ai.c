@@ -97,7 +97,6 @@ int getSumOfArray (int** array, int arrayDimension) {
     return sum;
 }
 
-
 int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *numbersOfElementsIndexInOrder) {
     // Creiamo una malloc contenente gli indici delle tessere da giocare in ordine
     // Gli indici negativi indicano che la tessera va girata
@@ -126,12 +125,6 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
     deckCopy[indexOfStartingTile][1] = 666;
     // Aggiorniamo il counter di elementi in ordine
     *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
-
-    //Salva tre variabili intere, ciascuna che verifichi la presenza nel deckCopy di una tessera speciale (0-0, 11-11, 12-21)
-    //La presenza viene verificata passando alla funzione getIndexOfWildcard() i valori delle tessere speciali
-    int isWildcard00Present =  getIndexOfWildcard(deckCopy, deckDimension, 0, 0);
-    int isWildcard1111Present = getIndexOfWildcard(deckCopy, deckDimension, 11, 11);
-    int isWildcard1221Present = getIndexOfWildcard(deckCopy, deckDimension, 12, 21);
 
     while (!is2dArrayEmpty(deckCopy, deckDimension)) {
         // Confronta la seconda faccia dell'ultima tessera con le altre tessere in deckCopy
@@ -166,31 +159,8 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
                 *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
             } else {
                 // Se la tessera non è un match con la precedente faccia rimuovo deckCopy[rowCounter][0] e deckCopy[rowCounter][1]
-
-                //Se isWildcard00Present è != -1, allora l'indice viene salvato in indexInOrder e la tessera viene rimossa dal deck
-                if (isWildcard00Present != -1) {
-                    indexInOrder[*numbersOfElementsIndexInOrder] = isWildcard00Present;
-                    deckCopy[isWildcard00Present][0] = 666;
-                    deckCopy[isWildcard00Present][1] = 666;
-                    *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
-                    isWildcard00Present = -1;
-                }else if(isWildcard00Present != -1){//Se isWildcard1111Present è != -1, allora l'indice viene salvato in indexInOrder e la tessera viene rimossa dal deck
-                    indexInOrder[*numbersOfElementsIndexInOrder] = isWildcard1111Present;
-                    deckCopy[isWildcard1111Present][0] = 666;
-                    deckCopy[isWildcard1111Present][1] = 666;
-                    *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
-                    isWildcard1111Present = -1;
-                }else if(isWildcard1221Present != -1){//Se isWildcard1221Present è != -1, allora l'indice viene salvato in indexInOrder e la tessera viene rimossa dal deck
-                    indexInOrder[*numbersOfElementsIndexInOrder] = isWildcard1221Present;
-                    deckCopy[isWildcard1221Present][0] = 666;
-                    deckCopy[isWildcard1221Present][1] = 666;
-                    *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
-                    isWildcard1221Present = -1;
-                }else{//Viene ripossa la carta recende dal deckCopy
-                   deckCopy[rowCounter][0] = 666;
-                   deckCopy[rowCounter][1] = 666;
-                }
-
+                deckCopy[rowCounter][0] = 666;
+                deckCopy[rowCounter][1] = 666;
             }
         }
     }
