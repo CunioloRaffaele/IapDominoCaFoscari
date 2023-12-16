@@ -20,3 +20,53 @@ Sarà inoltre possibile invocare l'eseguibile con il parametro, che abilita  abi
 ```sh
 .\iap.exe --challenge
 ```
+# Descrizione
+
+## Panoramica
+
+Questo programma in C implementa un versatile gioco del Domino con una serie di funzionalità che si adattano sia al gameplay standard che alle sfide avanzate. Il gioco include opzioni per visualizzare le tessere, ottenere tessere, giocare al Domino standard, giocare al Domino 2D e una modalità sfida dedicata. La modalità sfida fornisce una valutazione del mazzo di tessere del giocatore e suggerisce la miglior tessera di partenza.
+
+## Inizio
+
+Per compilare ed eseguire il programma, utilizza il seguente comando:
+
+```
+make run
+```
+
+
+Questo comando presuppone che le dipendenze e i file necessari siano presenti.
+
+## Funzionalità
+
+### 1. Visualizzazione delle Tessere
+
+Scegli l'opzione 1 nel menu principale per visualizzare le tessere possibili. Questo include la visualizzazione delle varie tessere standard e di tessere speciali presenti nel set di gioco.
+
+### 2. Ottenere Tessere
+
+Se il mazzo non è ancora assegnato (NULL), seleziona l'opzione 2 nel menu principale per ottenere un numero specifico (N) di tessere. Questa funzione è particolarmente utile per configurare il mazzo del giocatore.
+
+### 3. Visualizza le Tue Tessere
+
+Scegli l'opzione 3 per visualizzare le tessere attualmente assegnate al giocatore. Questa opzione è disponibile solo se il giocatore dispone di un mazzo di tessere valido.
+
+### 4. Gioca al Domino
+
+Seleziona l'opzione 4 per avviare una partita standard di Domino. Questa opzione guiderà i giocatori attraverso il processo di gioco.
+
+### 5. Gioca al Domino 2D
+
+Scegli l'opzione 5 per giocare a una variante del gioco nota come Domino 2D. Questa variante permette di posizionare le tessere in maniera verticale, agli estremi del piano di gioco facendo "crescere" il domino verso il basso. 
+
+### Uscita dal Programma
+
+Seleziona qualsiasi altro tasto per uscire dal programma in modo ordinato.
+
+## Modalità Sfida
+
+Per entrare nella modalità sfida, esegui il programma con il flag --challenge. La modalità sfida comporta una configurazione più avanzata in cui il giocatore inserisce le dimensioni e i dettagli del proprio mazzo di tessere. Il programma fornisce quindi una valutazione dell'IA e suggerisce la miglior tessera di partenza in base al mazzo del giocatore.
+
+```
+./domino --challenge
+```
