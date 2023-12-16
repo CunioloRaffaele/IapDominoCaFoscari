@@ -20,7 +20,7 @@ Sarà inoltre possibile invocare l'eseguibile con il parametro, che abilita  abi
 ```sh
 .\iap.exe --challenge
 ```
-# Descrizione
+# 1. Descrizione della struttura del progetto
 
 ## Panoramica
 
@@ -43,11 +43,11 @@ Questo comando presuppone che le dipendenze e i file necessari siano presenti.
 
 Scegli l'opzione 1 nel menu principale per visualizzare le tessere possibili. Questo include la visualizzazione delle varie tessere standard e di tessere speciali presenti nel set di gioco.
 
-### 2. Ottenere Tessere
+### 2. Ottenere tessere
 
-Se il mazzo non è ancora assegnato (NULL), seleziona l'opzione 2 nel menu principale per ottenere un numero specifico (N) di tessere. Questa funzione è particolarmente utile per configurare il mazzo del giocatore.
+Se il mazzo non è ancora assegnato (NULL), seleziona l'opzione 2 nel menu principale per ottenere un numero specifico (N) di tessere. Questa funzione serve per configurare il mazzo del giocatore.
 
-### 3. Visualizza le Tue Tessere
+### 3. Visualizza le tue Tessere
 
 Scegli l'opzione 3 per visualizzare le tessere attualmente assegnate al giocatore. Questa opzione è disponibile solo se il giocatore dispone di un mazzo di tessere valido.
 
