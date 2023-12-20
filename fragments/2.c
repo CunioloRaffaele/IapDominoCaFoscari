@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "../fragments.h"
 
 extern int** playerDeck;
 extern int playerDeckDimension;

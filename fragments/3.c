@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "../fragments.h"
 
 void fragment3(int **gameSet, int startingTileIndex, int selectedTileIndex, bool animation, int gameSetDimension) {
     spawn_screen_with_title("LE TUE TESSERE", animation);

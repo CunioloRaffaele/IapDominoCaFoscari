@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "../functions.h"
+
 int** alloc_player_deck_memory (int src_size) {
     int **generatedMalloc;
     generatedMalloc = (int**) malloc(sizeof(int*) * src_size);      // allochiamo la memoria per x int* (che contengono i puntatori agli interi dell'array)

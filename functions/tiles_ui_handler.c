@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "../functions.h"
+
 void spawn_tile (int top, int bottom, int column, bool isSelected) {
    if (isSelected) {
         colorzz(1);

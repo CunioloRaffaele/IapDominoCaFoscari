@@ -13,19 +13,8 @@
     #include <termios.h>
 #endif
 
-#define ASCII_1 49
-#define ASCII_2 50
-#define ASCII_3 51
-#define ASCII_4 52
-#define ASCII_5 53
-#define ASCII_6 54
-#define ASCII_7 55
-#define ASCII_8 56
-#define ASCII_9 57
-#define ASCII_0 48
-#define ASCII_A 97
-#define ASCII_D 100
-#define ASCII_Esc 27
+#include "../functions.h"
+
 int getch(void) {
 
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "../functions.h"
+#include "../fragments.h"
 
 extern int **gameSet;
 
