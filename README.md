@@ -14,11 +14,11 @@
 # Compilazione
 Il codice deve compilare con il comando
 ```sh
-gcc -O2 -std=c99 --pedantic *.c -o iap.exe
+gcc -O2 -std=c99 --pedantic *.c ./fragments/*.c ./functions/*.c -o iap
 ```
 Sarà inoltre possibile invocare l'eseguibile con il parametro, che abilita  abilita la consegna per le challenge
 ```sh
-.\iap.exe --challenge
+.\iap --challenge
 ```
 # Descrizione e struttura del progetto
 Questo programma in C implementa una versione del gioco "Domino" con una serie di funzionalità che si adattano sia al gameplay standard che a modallità più complesse come il gameplay automatico e il domino su due dimensioni. Il programma, nel menù principale, include opzioni per visualizzare le tessere, ottenere tessere, giocare al Domino standard e giocare al Domino 2D. Inoltre è stata inclusa una modalità di debug dell'algoritmo di gampeplay automatico richiamabile con "--challenge".
