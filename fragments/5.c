@@ -4,10 +4,11 @@
 
 extern int **gameSet;
 
-void generateVarieblas(int **playerDeck, int *playerDeckDimension, int ***played, int *directioncard)
+void generateVarieblas(int **playerDeck, int *playerDeckDimension, int ***orizzontal, int **dimension, int **vertical)
 {
-    **played = alloc_player_deck_memory(*playerDeckDimension);
-    *directioncard = (int *)malloc(sizeof(int) * *playerDeckDimension);
+    **orizzontal = alloc_player_deck_memory(*playerDeckDimension);
+    **dimension = (int *)malloc(sizeof(int) * *playerDeckDimension);
+    **vertical = (int *)malloc(sizeof(int) * *playerDeckDimension);
     **playerDeck = alloc_player_deck_memory(*playerDeckDimension);
     generate_player_deck(gameSet, &playerDeck, *playerDeckDimension);
 }
@@ -15,12 +16,14 @@ void generateVarieblas(int **playerDeck, int *playerDeckDimension, int ***played
 void fragment5()
 {
     int **playerDeck;
-    int **played;
+    int **orizzontal;
     int *directioncard;
+    int **vertical;
+    int **dimension;
     int playerDeckDimension = 0;
     int choose;
     scanf("%d", &playerDeckDimension);
-    generateVarieblas(playerDeck, playerDeckDimension, played, directioncard);
+    generateVarieblas(playerDeck, playerDeckDimension, orizzontal,dimension,vertical);
 jump:
     printf("Fai la tua mossa: \n");
     printf("1 | Visualizza tessere:  \n",
@@ -37,7 +40,7 @@ jump:
 
         break;
     case 2:
-        if (played[0][0] == 0)
+        if (orizzontal[0][0] == 0)
         {
             printf("Nessuna carta ancora giocata: \n");
             goto jump;
@@ -47,7 +50,7 @@ jump:
             printf("Gia giocate: \n");
             for (size_t i = 0; i < playerDeckDimension; i++)
             {
-                if (played[i][0] != 0)
+                if (orizzontal[i][0] != 0)
                 {
                     if (directioncard[i] == 0)
                     {
@@ -56,7 +59,7 @@ jump:
                     {
                     }
 
-                    printf("[%d", played[i][0], "|%d", played[i][1], "]\n");
+                    printf("[%d", orizzontal[i][0], "|%d", orizzontal[i][1], "]\n");
                 }
             }
             printf("1 | Posiziona tessera verticale:  \n",
@@ -71,18 +74,18 @@ jump:
     }
 }
 
-void addCard(int indexCard, int **playerdeck, int **played, int direction, int *cardplayed, int *playerDeckDimension)
+void orizzontalCard(int indexCard, int **playerdeck, int **orizzontal, int *cardplayed, int *playerDeckDimension)
 {
 
-    if (played[0][0] == playerdeck[indexCard][0])
+    if (orizzontal[0][0] == playerdeck[indexCard][0])
     {
         for (size_t i = *cardplayed; i > 0; i--)
         {
-            played[i + 1][0] = played[i][0];
-            played[i + 1][1] = played[i][1];
+            orizzontal[i + 1][0] = orizzontal[i][0];
+            orizzontal[i + 1][1] = orizzontal[i][1];
         }
-        played[0][0] = playerdeck[indexCard][1];
-        played[0][1] = playerdeck[indexCard][0];
+        orizzontal[0][0] = playerdeck[indexCard][1];
+        orizzontal[0][1] = playerdeck[indexCard][0];
         for (size_t i = indexCard; i < *playerDeckDimension; i++)
         {
             playerdeck[i][0] = playerdeck[i + 1][0];
@@ -91,15 +94,15 @@ void addCard(int indexCard, int **playerdeck, int **played, int direction, int *
         *playerDeckDimension--;
         *cardplayed++;
     }
-    else if (played[0][0] == playerdeck[indexCard][1])
+    else if (orizzontal[0][0] == playerdeck[indexCard][1])
     {
         for (size_t i = cardplayed; i > 0; i--)
         {
-            played[i + 1][0] = played[i][0];
-            played[i + 1][1] = played[i][1];
+            orizzontal[i + 1][0] = orizzontal[i][0];
+            orizzontal[i + 1][1] = orizzontal[i][1];
         }
-        played[0][0] = playerdeck[indexCard][0];
-        played[0][1] = playerdeck[indexCard][1];
+        orizzontal[0][0] = playerdeck[indexCard][0];
+        orizzontal[0][1] = playerdeck[indexCard][1];
         for (size_t i = indexCard; i < *playerDeckDimension; i++)
         {
             playerdeck[i][0] = playerdeck[i + 1][0];
@@ -108,11 +111,11 @@ void addCard(int indexCard, int **playerdeck, int **played, int direction, int *
         *playerDeckDimension--;
         *cardplayed++;
     }
-    else if (played[*cardplayed][1] == playerdeck[indexCard][0])
+    else if (orizzontal[*cardplayed][1] == playerdeck[indexCard][0])
     {
 
-        played[0][0] = playerdeck[indexCard][0];
-        played[0][1] = playerdeck[indexCard][1];
+        orizzontal[0][0] = playerdeck[indexCard][0];
+        orizzontal[0][1] = playerdeck[indexCard][1];
         for (size_t i = indexCard; i < *playerDeckDimension; i++)
         {
             playerdeck[i][0] = playerdeck[i + 1][0];
@@ -121,10 +124,10 @@ void addCard(int indexCard, int **playerdeck, int **played, int direction, int *
         *playerDeckDimension--;
         *cardplayed++;
     }
-    else if (played[*cardplayed][0] == playerdeck[indexCard][1])
+    else if (orizzontal[*cardplayed][0] == playerdeck[indexCard][1])
     {
-        played[0][0] = playerdeck[indexCard][1];
-        played[0][1] = playerdeck[indexCard][0];
+        orizzontal[0][0] = playerdeck[indexCard][1];
+        orizzontal[0][1] = playerdeck[indexCard][0];
         for (size_t i = indexCard; i < *playerDeckDimension; i++)
         {
             playerdeck[i][0] = playerdeck[i + 1][0];
@@ -135,6 +138,15 @@ void addCard(int indexCard, int **playerdeck, int **played, int direction, int *
     }
 }
 
-void verticalMove()
+void verticalCard(int indexCard, int **playerdeck, int **orizzontal, int *cardplayed, int *playerDeckDimension)
 {
+    if (orizzontal[0][0] == playerdeck[indexCard][0])
+    {
+        
+    }
+    else
+    {
+        /* code */
+    }
+    
 }
