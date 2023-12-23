@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h> 
+#include <stdbool.h>
+
+#include "../functions.h"
 
 // Si potrebbe rimuovere le tessere valutate dall'array di copia spostando le tessere successive di una posizione in avanti e riallocando l'array,
 // ma questo causerebbe gli indici dell'array di copia a cambiare e quindi non sarebbe più possibile utilizzare l'array originale per stampare le tessere.

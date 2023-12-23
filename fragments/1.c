@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "../fragments.h"
+
 void fragment1(int gameSet[20][2], int startingTileIndex, int selectedTileIndex, bool animation) {
     spawn_screen_with_title("21 TESSERE", animation);
     colorzz(2);

@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include "functions.h"
 #include "fragments.h"
 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-// TODO aggiungere nomi vicino a matricola
+#include "../functions.h"
+
 void introMessage(void)
 {
     char asciiArtString[] =

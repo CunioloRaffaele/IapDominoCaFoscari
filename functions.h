@@ -1,11 +1,20 @@
-#include <stdio.h>
+#ifndef __FUNCTIONS_H__
+#define __FUNCTIONS_H__
 
-#include "functions/initialization.c"
-#include "functions/terminal_handler.c"
-#include "functions/intro_message.c"
-#include "functions/tiles_ui_handler.c"
-#include "functions/ai.c"
-#include "functions/challengeHandler.c"
+#define ASCII_1 49
+#define ASCII_2 50
+#define ASCII_3 51
+#define ASCII_4 52
+#define ASCII_5 53
+#define ASCII_6 54
+#define ASCII_7 55
+#define ASCII_8 56
+#define ASCII_9 57
+#define ASCII_0 48
+#define ASCII_A 97
+#define ASCII_D 100
+#define ASCII_Esc 27
+
 
 void introMessage (void);                                   // Questa funzione mostra la "grafica testuale" di avvio programma.
                                                             // Funzione implementata per rendere più leggibile il main().
@@ -62,3 +71,5 @@ int AiEvaluation (int**, int);
 // is2dArrayEmpty (array playerDeck, array risultato Ai, int dimensione array risultato ai)
 void printCardsForChallenge (int **, int*, int);            // Questa funzione, preso l'array contenente gli indici delle tiles ordinate, cerca la tile corrispondente 
                                                             // nel deck e le stampa nel corretto ordine
+
+#endif

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "../functions.h"
+
 //Questa funzione, preso l'array contenentele gli indici delle tiles ordinante, cerca la tile corrispondente nel deck e le stampa nel corretto ordine
 void printCardsForChallenge(int** playerDeck, int* AiResult, int processAIDimension) {
     bool isFirst = true;
