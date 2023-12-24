@@ -1,4 +1,4 @@
-// 901146 903407 902939 902406
+// 901146 903407 902406
 
 // Compila il programma con "make run"
 
