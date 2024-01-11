@@ -66,6 +66,9 @@ int* processAI (int**, int, int, int*);                     // Funzione che proc
 // AiEvaluation (array, dimensione array)
 int AiEvaluation (int**, int);
 
+// show_alert (stringa da visualizzare nel popup)
+void show_alert (char[]);                                   // Creazione di un popup nativo di OS
+
 // LE SEGUENTI SONO FUNZIONI CHE VANNO USATE SOLO QUANDO IL PROGRAMMA VIENE LANCIATO CON IL PARAMETRO --challenge
 
 // is2dArrayEmpty (array playerDeck, array risultato Ai, int dimensione array risultato ai)
