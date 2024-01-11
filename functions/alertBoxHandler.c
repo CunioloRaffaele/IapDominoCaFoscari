@@ -5,8 +5,7 @@
 
 void show_alert (char text[]) {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
-        #include <windows.h>
-        MessageBoxA(NULL, "Message", text, MB_OK);
+        int test = MessageBoxA(NULL, text, "Domino", 0);
     #elif __APPLE__                                                                 // MacOs
         char str1[] = "osascript -e 'tell app \"Terminal\" to display dialog \"";
         char str2[] = "\"'";

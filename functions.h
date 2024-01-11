@@ -1,5 +1,6 @@
 #ifndef __FUNCTIONS_H__
 #define __FUNCTIONS_H__
+#include <stdbool.h>
 
 #define ASCII_1 49
 #define ASCII_2 50
