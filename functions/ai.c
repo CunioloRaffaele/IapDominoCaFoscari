@@ -36,8 +36,8 @@ int getIndexOfWildcard (int** deck, int deckDimension, int wildcard0, int wildca
 // Questa funzione serve per applicare gli effetti delle carte speciali sull'array.
 // Viene restituito un nuovo array che contiene le tessere del giocatore con le carte speciali applicate.
 int** arrayParser (int **deck, int *indexInOrder, int numbersOfElementsIndexInOrder) {
-    int** unparsedDeck = alloc_player_deck_memory(numbersOfElementsIndexInOrder);
-    int** parsedDeck =   alloc_player_deck_memory(numbersOfElementsIndexInOrder);
+    int** unparsedDeck = allocPlayerDeckMemory(numbersOfElementsIndexInOrder);
+    int** parsedDeck =   allocPlayerDeckMemory(numbersOfElementsIndexInOrder);
     // Copiamo i valori di deck in unparsedDeck con indexInOrder
     for (int i = 0; i < numbersOfElementsIndexInOrder; i++) {
         if (indexInOrder[i] < 0) {
@@ -117,7 +117,7 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
     // Creiamo una copia privata della malloc contenente il deck in modo da poter
     // rimuovere le tessere valutate senza intervenire sull'array originale.
     // Questa malloc va liberata alla fine della funzione.
-    int** deckCopy = alloc_player_deck_memory(deckDimension);
+    int** deckCopy = allocPlayerDeckMemory(deckDimension);
 
     // Copiamo i valori di deck in deckCopy
     for (int i = 0; i < deckDimension; i++) {

@@ -84,15 +84,16 @@ void colorzz(int color) {
     #endif
 }
 
-void clear_console(void) {
+void clearConsole(void) {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
         system("cls");
     #elif __APPLE__ || __linux__ || __unix__                                        // MacOs + Linux
-        printf("\e[H\e[2J\e[3J"); // This tells the terminal to move the cursor to the top left corner (\e[H), clear the screen (\e[2J), and clear the scrollback buffer (\e[3J).
+        printf("\033[H\033[2J\033[3J"); // This tells the terminal to move the cursor to the top left corner (\e[H), clear the screen (\e[2J), and clear the scrollback buffer (\e[3J).
+        // printf("\e[H\e[2J\e[3J");    // Using \033 instead of \e for ISO-standards compliance
     #endif
 }
 
-int screen_row(void) {
+int screenRow(void) {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
         ret = GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
         if (ret) {
@@ -106,7 +107,7 @@ int screen_row(void) {
         return 0;
 }
 
-int screen_col(void) {
+int screenCol(void) {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) // Windows
         ret = GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
         if (ret) {
@@ -120,11 +121,11 @@ int screen_col(void) {
         return 0;
 }
 
-void spawn_screen_with_title(char title[], bool animation) {
-    int col = screen_col();
-    int row = screen_row();
+void spawnScreenWithTitle(char title[], bool animation) {
+    int col = screenCol();
+    int row = screenRow();
     int title_len = strlen(title);
-    clear_console();
+    clearConsole();
     colorzz(3);
     if (animation) {
         for (int t = 0; t < 5; t++) {
@@ -153,7 +154,7 @@ void spawn_screen_with_title(char title[], bool animation) {
                 printf("\n");
             }
             usleep(80000);
-            clear_console();
+            clearConsole();
         }
     }
     for (int c = 0; c < col; c++) {

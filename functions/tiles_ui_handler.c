@@ -3,7 +3,7 @@
 
 #include "../functions.h"
 
-void spawn_tile (int top, int bottom, int column, bool isSelected) {
+void spawnTile (int top, int bottom, int column, bool isSelected) {
    if (isSelected) {
         colorzz(1);
     }

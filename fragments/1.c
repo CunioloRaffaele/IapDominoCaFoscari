@@ -3,7 +3,7 @@
 #include "../fragments.h"
 
 void fragment1(int gameSet[20][2], int startingTileIndex, int selectedTileIndex, bool animation) {
-    spawn_screen_with_title("21 TESSERE", animation);
+    spawnScreenWithTitle("21 TESSERE", animation);
     colorzz(2);
     printf("| A      -  Scorri le tiles a sinistra (una alla volta)\n");
     printf("| D      -  Scorri le tiles a destra (una alla volta)\n");
@@ -12,10 +12,10 @@ void fragment1(int gameSet[20][2], int startingTileIndex, int selectedTileIndex,
 
     // Controllo di quante tiles stanno orizzontalmente nel terminale.
     // Una tile occupa 18 caratteri (18 colonne)
-    int tilesPerScreen = screen_col() / 18;
+    int tilesPerScreen = screenCol() / 18;
     int columnToSpawn = 0;
     for (int counter = startingTileIndex; counter < tilesPerScreen+ startingTileIndex; counter ++) {
-        spawn_tile(gameSet[counter][0], gameSet[counter][1], 18*columnToSpawn, selectedTileIndex == counter);
+        spawnTile(gameSet[counter][0], gameSet[counter][1], 18*columnToSpawn, selectedTileIndex == counter);
         columnToSpawn++;
     }
     printf("\033[12B\n");

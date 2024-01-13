@@ -4,7 +4,7 @@
 
 #include "../functions.h"
 
-int** alloc_player_deck_memory (int src_size) {
+int** allocPlayerDeckMemory (int src_size) {
     int **generatedMalloc;
     generatedMalloc = (int**) malloc(sizeof(int*) * src_size);      // allochiamo la memoria per x int* (che contengono i puntatori agli interi dell'array)
     for (size_t i = 0; i < src_size; i ++){
@@ -13,7 +13,7 @@ int** alloc_player_deck_memory (int src_size) {
     return generatedMalloc;
 }
 
-void generate_player_deck (int gameSet[21][2], int **deck, int arrayDimensions) {
+void generatePlayerDeck (int gameSet[21][2], int **deck, int arrayDimensions) {
     srand ( time(NULL) );
     for (int counter = 0; counter < arrayDimensions; counter++) {
         // Generiamo un numero randomico tra 0 9 per decidere se mettere una tessera speciale o una normale
@@ -38,7 +38,7 @@ void generate_player_deck (int gameSet[21][2], int **deck, int arrayDimensions) 
     }
 }
 
-void generate_tiles_composition (int array[21][2]) {
+void generateTilesComposition (int array[21][2]) {
     int it= 0;
     for (int c = 1; c <= 6; c++) {
         for (int d = c; d <= 6; d++) {

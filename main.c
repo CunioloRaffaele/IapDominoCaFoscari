@@ -10,7 +10,7 @@
 #include "fragments.h"
 
 // Creiamo un array multidimensionale per contenere le 21 tessere possibili ciascuna con una coppia di numeri da 1 a 6.
-// L'array contiene 20 tessere che hanno ciascuna due facce (top bottom nella funzione 'spawn_tile')
+// L'array contiene 20 tessere che hanno ciascuna due facce (top bottom nella funzione 'spawnTile')
 // Se vuoi conoscere la due facce di tessera devi printare gameSet [indice] [0] e gameSet [indice] [1] 
 int gameSet [21][2];
 // Puntatore di memoria all'array multidimensionale contenente le tessere del giocatore
@@ -18,7 +18,7 @@ int **playerDeck;
 int playerDeckDimension = 0;
 
 void menuUi (void) {
-    spawn_screen_with_title("MENU", true);
+    spawnScreenWithTitle("MENU", true);
     int menuOption;
     colorzz(2);
     printf("| 1      -  Visualizza i possibili tiles che ti potrebbero essere asegnati \n            (compresi quelli speciali)\n");
@@ -69,18 +69,18 @@ void menuUi (void) {
     default:
         break;
     }
-    //generate_player_deck(playerTiles, 21);
+    //generatePlayerDeck(playerTiles, 21);
     colorzz(0);
 }
 
 void challengeMode (void) {
     // Creazione dell'array contenente i tiles del player e inserimento dei dati.
     scanf("%d", & playerDeckDimension);
-    int** playerDeck = alloc_player_deck_memory (playerDeckDimension);
+    int** playerDeck = allocPlayerDeckMemory (playerDeckDimension);
     for (int counter = 0; counter < playerDeckDimension; counter ++) {
         scanf("%d %d", &playerDeck[counter][0], &playerDeck[counter][1]);
     }
-    //int bestStartingTile = AiEvaluation(playerDeck, playerDeckDimension);
+    //int bestStartingTile = aiEvaluation(playerDeck, playerDeckDimension);
     int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
     int* AiResult = processAI(playerDeck, playerDeckDimension, 0, &processAIDimension);
 
@@ -104,18 +104,18 @@ int main(int argc, char* argv[]) {
             challengeMode();
         }
     }
-    clear_console();
+    clearConsole();
     introMessage();
     getchar();
-    clear_console();
+    clearConsole();
 
     // Preparazione variabili necessarie
-    generate_tiles_composition(gameSet);
+    generateTilesComposition(gameSet);
 
     // Menu
     menuUi();
 /*
-    clear_console();
+    clearConsole();
     introMessage();
     printf("\n\nGrazie per aver usato Domino\n\n");*/
     return 0;

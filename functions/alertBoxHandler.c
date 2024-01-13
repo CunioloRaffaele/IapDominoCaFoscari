@@ -3,7 +3,7 @@
 #include <string.h>
 #include "../functions.h"
 
-void show_alert (char text[]) {
+void showAlert (char text[]) {
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
         int test = MessageBoxA(NULL, text, "Domino", 0);
     #elif __APPLE__                                                                 // MacOs
