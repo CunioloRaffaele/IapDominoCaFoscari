@@ -44,7 +44,8 @@ void colorzz(int color) {
 
         switch (color) {
         case 0: // Restore to original color attribute
-            SetConsoleTextAttribute(hConsole, saved_attributes);
+            // SetConsoleTextAttribute(hConsole, saved_attributes);
+            // Commentato per bug nella colorazione ma non rimosso per evitare problemi
             break;
         case 1:
             SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
@@ -56,7 +57,7 @@ void colorzz(int color) {
             SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
             break;
         case 4:
-            SetConsoleTextAttribute(hConsole, saved_attributes);
+            SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
             break;
         default:
             break;

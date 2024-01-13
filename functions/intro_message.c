@@ -25,14 +25,25 @@ void introMessage(void)
     printCentered("      ------------ Universita\' Ca' Foscari  2023-2024 -------------      ");
     printCentered("      -------------------------------------------------------------      ");
     printCentered("             github.com/CunioloRaffaele/IapDominoCaFoscari.git           ");
-    printCentered("      -------------------------------------------------------------      \n");
+    printCentered("       -------------------------------------------------------------      \n");
+    printf("\n");
+    //printf("%s", asciiArtString);
+    printCentered("          88                                88                          ");
+    printCentered("          88                                88                          ");
+    printCentered("          88                                                            ");
+    printCentered("  ,adPPYb,88  ,adPPYba,  88,dPYba,,adPYba,  88 8b,dPPYba,   ,adPPYba,   ");
+    printCentered(" a8      Y88 a8       8a 88P     88      8a 88 88P      8a a8       8a  ");
+    printCentered(" 8b       88 8b       d8 88      88      88 88 88       88 8b       d8  ");
+    printCentered("   8a,   ,d88   8a,   ,a8 88      88      88 88 88       88 8a,     ,a8   ");
+    printCentered("     8bbdPY8    YbbdP88  88      88      88 88 88       88    PYbbdP    ");
     printf("\n");
     printCentered("      -------------------------------------------------------------      ");
     printCentered("      --------------   Premi ENTER per cominciare   ---------------      ");
     printCentered("      -------------------------------------------------------------      ");
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
     printCentered("      Si suggerisce di non usare questo programma su cmd di Windows      ");
-    printCentered("                         esegui con PowerShell                           ");
+    printCentered("                    ma di eseguirlo con PowerShell.                      ");
+#endif
     printf("\n\n");
-    printf("%s", asciiArtString);
     colorzz(0);
 }

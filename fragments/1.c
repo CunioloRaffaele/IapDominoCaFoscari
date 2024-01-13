@@ -8,7 +8,7 @@ void fragment1(int gameSet[20][2], int startingTileIndex, int selectedTileIndex,
     printf("| A      -  Scorri le tiles a sinistra (una alla volta)\n");
     printf("| D      -  Scorri le tiles a destra (una alla volta)\n");
     printf("| Altro  -  Torna al menu precedente\n\n\n");
-    colorzz(0);
+    colorzz(4);
 
     // Controllo di quante tiles stanno orizzontalmente nel terminale.
     // Una tile occupa 18 caratteri (18 colonne)

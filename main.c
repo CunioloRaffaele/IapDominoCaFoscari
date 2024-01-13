@@ -70,7 +70,7 @@ void menuUi (void) {
         break;
     }
     //generatePlayerDeck(playerTiles, 21);
-    colorzz(0);
+    colorzz(4);
 }
 
 void challengeMode (void) {
