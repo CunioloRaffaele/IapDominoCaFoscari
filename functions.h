@@ -20,7 +20,7 @@
 void introMessage (void);                                   // Questa funzione mostra la "grafica testuale" di avvio programma.
                                                             // Funzione implementata per rendere più leggibile il main().
 
-void menuUi (void);                                             // Questa funzione mostra la schermata di menu.
+void menuUi (void);                                         // Questa funzione mostra la schermata di menu.
                                                             // Funzione implementata per rendere più leggibile il main().
 // generatePlayerDeck (gameset, array, dimensione array)
 void generatePlayerDeck (int [21][2], int**, int);          // Crea set di tessere.
@@ -34,6 +34,8 @@ void clearConsole (void);                                   // Elimina l'intero 
 int screenRow (void);                                       // Ritorna dimensione terminale (row)
 
 int screenCol (void);                                       // Ritorna dimensione terminale (col)
+
+void printCentered (char[]);                                // Printa tanti spazi quanto servono per centrare il testo orizzontalmente e poi stampa il testo.
 
 int getch (void);                                           // Questa funzione disabilita la modalità canonica e la modalità echo del terminale, consentendo
                                                             // al programma di leggere un singolo carattere senza attendere un newline e senza

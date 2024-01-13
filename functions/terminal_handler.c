@@ -175,3 +175,12 @@ void spawnScreenWithTitle(char title[], bool animation) {
     printf("\n");
     colorzz(0);
 }
+
+void printCentered (char text[]) {
+    int col = screenCol();
+    int difference = col - strlen(text);
+    for (int counter = 0; counter < difference / 2; counter ++) {
+        printf(" ");
+    }
+    printf("%s\n", text);
+}
