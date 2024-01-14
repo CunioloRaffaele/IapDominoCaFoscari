@@ -51,6 +51,7 @@ void menuUi (void) {
         break;
     case ASCII_3:
         if (playerDeck == NULL) {
+            showAlert("Questa opzione è disponibile solo dopo aver generato un deck di tiles.");
             menuUi();
         }else {
             fragment3(playerDeck, 0, 0, true, playerDeckDimension);
@@ -58,11 +59,13 @@ void menuUi (void) {
         break;
     case ASCII_4:
         if (playerDeck == NULL) {
+            showAlert("Questa opzione è disponibile solo dopo aver generato un deck di tiles.");
             menuUi();
         }else {}
         break;
     case ASCII_5:
         if (playerDeck == NULL) {
+            showAlert("Questa opzione è disponibile solo dopo aver generato un deck di tiles.");
             menuUi();
         }else {}
         break;
@@ -100,10 +103,26 @@ void challengeMode (void) {
 int main(int argc, char* argv[]) {
     // Avvio
     for (int i = 0; i< argc; i++) {
+        // The return value from strcmp is 0 if the two strings are equal, less than 0 if str1 compares less than str2 , and greater than 0 if str1 compares greater than str2
         if ((strcmp((argv[i]), "--challenge")) == 0) {
             challengeMode();
         }
+        if ((strcmp((argv[i]), "--debugging")) == 0) {
+            spawnScreenWithTitle("Debugging status", false);
+            playerDeckDimension = 3;
+            playerDeck = allocPlayerDeckMemory(playerDeckDimension);
+            generateTilesComposition(gameSet);
+            generatePlayerDeck(gameSet, playerDeck, playerDeckDimension);
+            printf("Tiles generate con successo!\n");
+            for (int counter = 0; counter < playerDeckDimension; counter ++) {
+                printf("%d %d\n", playerDeck[counter][0], playerDeck[counter][1]);
+            }
+            getchar();
+            clearConsole();
+            menuUi();
+        }
     }
+
     clearConsole();
     introMessage();
     getchar();
@@ -114,9 +133,8 @@ int main(int argc, char* argv[]) {
 
     // Menu
     menuUi();
-/*
+
     clearConsole();
-    introMessage();
-    printf("\n\nGrazie per aver usato Domino\n\n");*/
+    exitMessage();
     return 0;
 }

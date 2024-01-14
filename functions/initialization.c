@@ -22,7 +22,7 @@ void generatePlayerDeck (int gameSet[21][2], int **deck, int arrayDimensions) {
         int random = rand() % 10;
         if (random <= 6) {
             // Generiamo un numero randomico tra 0 e 21
-            int randomTile = rand() % 22;
+            int randomTile = rand() % 21;
             deck[counter][0] = gameSet[randomTile][0];
             deck[counter][1] = gameSet[randomTile][1];
         }else if (random == 7) {

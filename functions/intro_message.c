@@ -4,7 +4,7 @@
 
 void introMessage(void)
 {
-    char asciiArtString[] =
+    /*char asciiArtString[] =
         "             88                                88                          \n"
         "             88                                88                          \n"
         "             88                                                            \n"
@@ -12,7 +12,7 @@ void introMessage(void)
         "    a8      Y88 a8       8a 88P     88      8a 88 88P      8a a8       8a  \n"
         "    8b       88 8b       d8 88      88      88 88 88       88 8b       d8  \n"
         "     8a,   ,d88   8a,   ,a8 88      88      88 88 88       88 8a,     ,a8   \n"
-        "        8bbdPY8    YbbdP88  88      88      88 88 88       88    PYbbdP    \n";
+        "        8bbdPY8    YbbdP88  88      88      88 88 88       88    PYbbdP    \n";*/
     colorzz(3);
     printCentered("      -------------------------------------------------------------      ");
     printCentered("      -------------- Benvenuto nel programma domino ---------------      ");
@@ -46,4 +46,25 @@ void introMessage(void)
 #endif
     printf("\n\n");
     colorzz(0);
+}
+
+void exitMessage(void) {
+    printf("\n\n\n\n");
+    colorzz(3);
+    printCentered("          88                                88                          ");
+    printCentered("          88                                88                          ");
+    printCentered("          88                                                            ");
+    printCentered("  ,adPPYb,88  ,adPPYba,  88,dPYba,,adPYba,  88 8b,dPPYba,   ,adPPYba,   ");
+    printCentered(" a8      Y88 a8       8a 88P     88      8a 88 88P      8a a8       8a  ");
+    printCentered(" 8b       88 8b       d8 88      88      88 88 88       88 8b       d8  ");
+    printCentered("   8a,   ,d88   8a,   ,a8 88      88      88 88 88       88 8a,     ,a8   ");
+    printCentered("     8bbdPY8    YbbdP88  88      88      88 88 88       88    PYbbdP    ");
+    printf("\n");
+    printCentered("      -------------------------------------------------------------      ");
+    printCentered("      ------------ Universita\' Ca' Foscari  2023-2024 -------------      ");
+    printCentered("      -------------------------------------------------------------      ");
+    printCentered("             github.com/CunioloRaffaele/IapDominoCaFoscari.git           ");
+    printCentered("       -------------------------------------------------------------      \n");
+    colorzz(2);
+    printCentered("Grazie per aver usato Domino\n\n");
 }

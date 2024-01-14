@@ -1,23 +1,20 @@
 # Non sta toccar.
 
 CC = clang
-CFLAGS = -Wall -Werror -std=c99
+CFLAGS = -Wall -Werror -std=c99 -O2 --pedantic
 
 .PHONY: all clean
 
-all: dominoIlC
+all: iap run
 
-dominoIlC: main.o functions.h
-	$(CC) $(CFLAGS) -o dominoIlC main.c
+iap:
+	$(CC) $(CFLAGS) *.c ./fragments/*.c ./functions/*.c -o iap
 
-main.o: main.c $(functions/*.h)
-	$(CC) $(CFLAGS) -c main.c
-
-run: dominoIlC
-	./dominoIlC
+run: iap
+	./iap --debugging
 
 clean:
-	rm -f *.o main
+	rm -f *.o main ./iap
 
 # https://youtu.be/yA8uXpZL-QM?feature=shared
 # https://makefiletutorial.com

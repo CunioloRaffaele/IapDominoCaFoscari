@@ -20,6 +20,8 @@
 void introMessage (void);                                   // Questa funzione mostra la "grafica testuale" di avvio programma.
                                                             // Funzione implementata per rendere più leggibile il main().
 
+void exitMessage (void);                                    // Questa funzione mostra la "grafica testuale" di chiusura programma.
+
 void menuUi (void);                                         // Questa funzione mostra la schermata di menu.
                                                             // Funzione implementata per rendere più leggibile il main().
 // generatePlayerDeck (gameset, array, dimensione array)

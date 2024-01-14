@@ -10,13 +10,21 @@ void spawnTile (int top, int bottom, int column, bool isSelected) {
     printf("\n\033[%dC", column);
     printf("        //\\     \n\033[%dC", column);
     printf("       //  \\    \n\033[%dC", column);
-    printf("      //  ");
+    if (top > 9){
+        printf("      // ");
+    } else {
+        printf("      //  ");
+    }
     printf("%d", top);
     printf(" \\   \n\033[%dC", column);
     printf("     //\\    /   \n\033[%dC", column);
     printf("    //  \\  /    \n\033[%dC", column);
     printf("   //    \\/     \n\033[%dC", column);
-    printf("   \\  ");
+    if (bottom > 9) {
+        printf("   \\ ");
+    } else {
+        printf("   \\  ");
+    }
     printf("%d", bottom);
     printf("  /       \n\033[%dC", column);
     printf("    \\   /        \n\033[%dC", column);
