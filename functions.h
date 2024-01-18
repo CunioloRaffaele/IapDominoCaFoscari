@@ -14,6 +14,10 @@
 #define ASCII_0 48
 #define ASCII_A 97
 #define ASCII_D 100
+#define ASCII_Q 113
+#define ASCII_E 101
+#define ASCII_W 119
+#define ASCII_S 115
 #define ASCII_Esc 27
 
 

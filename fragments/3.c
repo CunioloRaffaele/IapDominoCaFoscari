@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "../fragments.h"
 
-void fragment3(int **gameSet, int startingTileIndex, int selectedTileIndex, bool animation, int playerDeckDimension) {
+void fragment3(int **playerDeck, int startingTileIndex, int selectedTileIndex, bool animation, int playerDeckDimension) {
     spawnScreenWithTitle("LE TUE TESSERE", animation);
     colorzz(2);
     printf("| A      -  Scorri le tiles a sinistra (una alla volta)\n");
@@ -16,7 +16,7 @@ void fragment3(int **gameSet, int startingTileIndex, int selectedTileIndex, bool
     int columnToSpawn = 0;
     for (int counter = startingTileIndex; counter < tilesPerScreen + startingTileIndex; counter ++) {
         if (counter < playerDeckDimension + startingTileIndex){
-            spawnTile(gameSet[counter][0], gameSet[counter][1], 18*columnToSpawn, selectedTileIndex == counter);
+            spawnTile(playerDeck[counter][0], playerDeck[counter][1], 18*columnToSpawn, selectedTileIndex == counter);
             columnToSpawn++;
         } else {
             break;
@@ -37,9 +37,9 @@ void fragment3(int **gameSet, int startingTileIndex, int selectedTileIndex, bool
                 if ((selectedTileIndex - 1) >= 0) {
                     selectedTileIndex --;
                 }
-                fragment3(gameSet, 0, selectedTileIndex, false, playerDeckDimension);
+                fragment3(playerDeck, 0, selectedTileIndex, false, playerDeckDimension);
             } else {
-                fragment3(gameSet, startingTileIndex - 1, selectedTileIndex - 1, false, playerDeckDimension);
+                fragment3(playerDeck, startingTileIndex - 1, selectedTileIndex - 1, false, playerDeckDimension);
             }
             break;
         case ASCII_D:
@@ -48,12 +48,12 @@ void fragment3(int **gameSet, int startingTileIndex, int selectedTileIndex, bool
                     selectedTileIndex ++;
                 }
                 if ((playerDeckDimension - tilesPerScreen) <= 0) {
-                    fragment3(gameSet, startingTileIndex, selectedTileIndex, false, playerDeckDimension);
+                    fragment3(playerDeck, startingTileIndex, selectedTileIndex, false, playerDeckDimension);
                 } else {
-                    fragment3(gameSet, playerDeckDimension - tilesPerScreen, selectedTileIndex, false, playerDeckDimension);
+                    fragment3(playerDeck, playerDeckDimension - tilesPerScreen, selectedTileIndex, false, playerDeckDimension);
                 }
             } else {
-                fragment3(gameSet, startingTileIndex + 1, startingTileIndex + 1, false, playerDeckDimension);
+                fragment3(playerDeck, startingTileIndex + 1, startingTileIndex + 1, false, playerDeckDimension);
             }
             break;
         default:

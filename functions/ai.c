@@ -66,7 +66,10 @@ int** arrayParser (int **deck, int *indexInOrder, int numbersOfElementsIndexInOr
                 }
             }
             // Copiamo la tessera speciale [11 | 11] in parsedDeck sostituendo il suo valore con la cifra della tessera precedente
-            int previousCardSecondFace = parsedDeck[counterDeckPosition - 1][1];
+            int previousCardSecondFace = 0;
+            if (counterDeckPosition != 0) {
+                previousCardSecondFace = parsedDeck[counterDeckPosition - 1][1];
+            }
             parsedDeck[counterDeckPosition][0] = previousCardSecondFace;
             parsedDeck[counterDeckPosition][1] = previousCardSecondFace;
         }
@@ -74,8 +77,12 @@ int** arrayParser (int **deck, int *indexInOrder, int numbersOfElementsIndexInOr
         // Gestione della tessera speciale [12 | 21] (copia “a specchio” la tessera adiacente)
         if (unparsedDeck[counterDeckPosition][0] == 12 && unparsedDeck[counterDeckPosition][1] == 21) {
             // Copiamo la tessera speciale [12 | 21] in parsedDeck sostituendo il suo valore con la tessera adiacente
-            int previousCardFirstFace = parsedDeck[counterDeckPosition - 1][0];
-            int previousCardSecondFace = parsedDeck[counterDeckPosition - 1][1];
+            int previousCardFirstFace = 0;
+            int previousCardSecondFace = 0;
+            if (counterDeckPosition != 0) {
+                previousCardFirstFace = parsedDeck[counterDeckPosition - 1][0];
+                previousCardSecondFace = parsedDeck[counterDeckPosition - 1][1];
+            }
             parsedDeck[counterDeckPosition][0] = previousCardSecondFace;
             parsedDeck[counterDeckPosition][1] = previousCardFirstFace;
         }

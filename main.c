@@ -61,7 +61,9 @@ void menuUi (void) {
         if (playerDeck == NULL) {
             showAlert("Questa opzione è disponibile solo dopo aver generato un deck di tiles.");
             menuUi();
-        }else {}
+        }else {
+            fragment4(playerDeck, 0, 0, true, playerDeckDimension, NULL);
+        }
         break;
     case ASCII_5:
         if (playerDeck == NULL) {
@@ -109,7 +111,7 @@ int main(int argc, char* argv[]) {
         }
         if ((strcmp((argv[i]), "--debugging")) == 0) {
             spawnScreenWithTitle("Debugging status", false);
-            playerDeckDimension = 3;
+            playerDeckDimension = 8;
             playerDeck = allocPlayerDeckMemory(playerDeckDimension);
             generateTilesComposition(gameSet);
             generatePlayerDeck(gameSet, playerDeck, playerDeckDimension);
@@ -117,6 +119,11 @@ int main(int argc, char* argv[]) {
             for (int counter = 0; counter < playerDeckDimension; counter ++) {
                 printf("%d %d\n", playerDeck[counter][0], playerDeck[counter][1]);
             }
+            printf("Mosse AI\n");
+            int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
+            int* AiResult = processAI(playerDeck, playerDeckDimension, 0, &processAIDimension);
+            printf("AI dimension = %d\n", processAIDimension);
+            printCardsForChallenge(playerDeck, AiResult, processAIDimension);
             getchar();
             clearConsole();
             menuUi();
