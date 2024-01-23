@@ -12,3 +12,4 @@ main
 *.code-workspace
 .idea/
 cmake-build-debug/
+doxygen/

@@ -7,6 +7,8 @@
 int** allocPlayerDeckMemory (int src_size) {
     int **generatedMalloc;
     generatedMalloc = (int**) malloc(sizeof(int*) * src_size);      // allochiamo la memoria per x int* (che contengono i puntatori agli interi dell'array)
+    // Era possibile anche fare int* m = (int*) malloc(rows * cols * sizeof(int));
+    // ma la soluzione scelta permette comunque l’accesso agli elementi della matrice con l’uso delle quadre m[i][j]
     for (size_t i = 0; i < src_size; i ++){
         generatedMalloc[i] = (int*) malloc(2 * sizeof(int));
     }

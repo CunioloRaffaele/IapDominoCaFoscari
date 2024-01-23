@@ -1,6 +1,19 @@
 // 901146 903407 902406
 
-// Compila il programma con "make run"
+/**
+* @file main.c
+* @author Barison Alberto 901146, Cuniolo Raffaele 903407, Veggis Francesco 902406
+* @mainpage main C Domino Iap 2024
+* @section intro_sec Introduzione
+*
+* Questo programma in C implementa una versione del gioco "Domino" con una serie di funzionalità che si adattano sia al gameplay standard che a modallità più complesse come il gameplay automatico e il domino su due dimensioni. Il programma, nel menù principale, include opzioni per visualizzare le tessere, ottenere tessere, giocare al Domino standard e giocare al Domino 2D. Inoltre è stata inclusa una modalità di debug dell'algoritmo di gampeplay automatico richiamabile con "--challenge".
+* Il progetto è open source (https://github.com/CunioloRaffaele/IapDominoCaFoscari.git) con licenza MIT.
+*
+* @section install_sec Compilazione
+* @subsection step1 Step 1: Installa gcc o clang
+* @subsection step2 Step 2: Clona il repository con gh repo clone CunioloRaffaele/IapDominoCaFoscari
+* @subsection step3 Step 3: Esegui il comando: gcc -O2 -std=c99 --pedantic *.c ./fragments/*.c ./functions/*.c -o iap
+*/
 
 #include <stdio.h>
 #include <string.h>
@@ -9,12 +22,19 @@
 #include "functions.h"
 #include "fragments.h"
 
-// Creiamo un array multidimensionale per contenere le 21 tessere possibili ciascuna con una coppia di numeri da 1 a 6.
-// L'array contiene 20 tessere che hanno ciascuna due facce (top bottom nella funzione 'spawnTile')
-// Se vuoi conoscere la due facce di tessera devi printare gameSet [indice] [0] e gameSet [indice] [1] 
+/**
+Creiamo un array multidimensionale per contenere le 21 tessere possibili ciascuna con una coppia di numeri da 1 a 6.
+L'array contiene 20 tessere che hanno ciascuna due facce (top bottom nella funzione 'spawnTile')
+Se vuoi conoscere la due facce di tessera devi printare gameSet [indice] [0] e gameSet [indice] [1]
+*/
 int gameSet [21][2];
-// Puntatore di memoria all'array multidimensionale contenente le tessere del giocatore
+/**
+Puntatore di memoria all'array multidimensionale contenente le tessere del giocatore
+*/
 int **playerDeck;
+/**
+Dimensione di **playerDeck
+*/
 int playerDeckDimension = 0;
 
 void menuUi (void) {
