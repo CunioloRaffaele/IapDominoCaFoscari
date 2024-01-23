@@ -3,10 +3,8 @@
 
 #include "../functions.h"
 
-void spawnTile (int top, int bottom, int column, bool isSelected) {
-   if (isSelected) {
-        colorzz(1);
-    }
+void spawnTile (int top, int bottom, int column, int color) {
+    colorzz(color);
     printf("\n\033[%dC", column);
     printf("        //\\     \n\033[%dC", column);
     printf("       //  \\    \n\033[%dC", column);
@@ -30,7 +28,5 @@ void spawnTile (int top, int bottom, int column, bool isSelected) {
     printf("    \\   /        \n\033[%dC", column);
     printf("     \\ /         \n\033[%dC", column);
     printf("\033[10A"); // Sposta il cursore alla riga di partenza della stampa (10 caratteri piu' in alto));
-    if (isSelected) {
-        colorzz(0);
-    }
+    colorzz(0);
 }

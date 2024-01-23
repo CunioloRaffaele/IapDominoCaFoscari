@@ -7,6 +7,7 @@
 */
 #include <stdbool.h>
 
+#define ASCII_Space 32
 #define ASCII_1 49
 #define ASCII_2 50
 #define ASCII_3 51
@@ -102,9 +103,9 @@ void spawnScreenWithTitle (char[], bool);
 * @param int Numero top
 * @param int Numero Bottom
 * @param int Colonna nella quale stampare
-* @param bool Stato della tessera (selezionata = rosso o no = altro colore)
+* @param int Stato della tessera (selezionata = rosso o no = altro colore) (per semplicità viene usato come booleano quindi le tessere selezionate sono tutte di colore rosso)
 */
-void spawnTile (int, int, int, bool);
+void spawnTile (int, int, int, int);
 
 /**
 * Genera 21 tessere, ciascuna con una coppia di numeri da 1 a 6.

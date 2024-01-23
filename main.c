@@ -12,7 +12,7 @@
 * @section install_sec Compilazione
 * @subsection step1 Step 1: Installa gcc o clang
 * @subsection step2 Step 2: Clona il repository con gh repo clone CunioloRaffaele/IapDominoCaFoscari
-* @subsection step3 Step 3: Esegui il comando: gcc -O2 -std=c99 --pedantic *.c ./fragments/*.c ./functions/*.c -o iap
+* @subsection step3 Step 3: Esegui il comando: gcc -O2 -std=c99 --pedantic *.c ./fragments/ *.c ./functions/ *.c -o iap
 */
 
 #include <stdio.h>
@@ -29,7 +29,7 @@ Se vuoi conoscere la due facce di tessera devi printare gameSet [indice] [0] e g
 */
 int gameSet [21][2];
 /**
-Puntatore di memoria all'array multidimensionale contenente le tessere del giocatore
+Puntatore di memoria all'array multidimensionale contenente le tessere del giocatore (nell'orgine generato casualmente... Vanno ordinate per indice, senza variare playerDeck).
 */
 int **playerDeck;
 /**
@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
         }
         if ((strcmp((argv[i]), "--debugging")) == 0) {
             spawnScreenWithTitle("Debugging status", false);
-            playerDeckDimension = 8;
+            playerDeckDimension = 20;
             playerDeck = allocPlayerDeckMemory(playerDeckDimension);
             generateTilesComposition(gameSet);
             generatePlayerDeck(gameSet, playerDeck, playerDeckDimension);

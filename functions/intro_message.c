@@ -39,7 +39,7 @@ void introMessage(void)
     printf("\n");
     printCentered("      -------------------------------------------------------------      ");
     printCentered("      --------------   Premi ENTER per cominciare   ---------------      ");
-    printCentered("      -------------------------------------------------------------      ");
+    printCentered("      --------------------------- v1 ------------------------------      ");
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
     printCentered("      Si suggerisce di non usare questo programma su cmd di Windows      ");
     printCentered("                    ma di eseguirlo con PowerShell.                      ");

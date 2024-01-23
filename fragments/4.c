@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include "../fragments.h"
 
+int **newPD;
+int* AiResult;
+
 struct gameNodeLin {
     int index;
     int top;                    // Semplifichiamo includendo nella struct anche le due facce della tessera per non rendere
@@ -10,10 +13,18 @@ struct gameNodeLin {
     gameNodeLinList *next;      // fatte direttamente all'aggiunta di una nuova tessera.
 };
 
-bool verifyCompatibility4 (int bottomOfPrec, int topOfSucc) {
-    if (bottomOfPrec == topOfSucc){
+void free_list_it(gameNodeLinList *l) {
+    while (l) {
+        gameNodeLinList *next = l->next;
+        free(l);
+        l = next;
+    }
+}
+
+bool verifyCompatibility4 (int prec, int succ) {
+    if (prec == succ) {
         return true;
-    } else if ( topOfSucc == 11 || topOfSucc == 12 || topOfSucc == 0 || bottomOfPrec == 0 || bottomOfPrec == 21 || bottomOfPrec == 11) {
+    } else if ( succ == 11 || succ == 12 || succ == 0 || prec == 0 || prec == 21 || prec == 11) {
         return true;
     } else {
         return false;
@@ -39,7 +50,7 @@ void addTileToList4 (int ** playerDeck, int selectedTileIndex, bool isFlipped, g
         return;
     }
     // Verifico che la tessera selezionata sia compatibile con quella precedente
-    if (verifyCompatibility4(playerDeck[copyOfTesta -> index][1], playerDeck[selectedTileIndex][isFlipped])){
+    if (verifyCompatibility4(copyOfTesta -> bottom, playerDeck[selectedTileIndex][isFlipped])){
         gameNodeLinList * newNode = (gameNodeLinList*)malloc(sizeof (gameNodeLinList));
         if (playerDeck[selectedTileIndex][0] == 0 && playerDeck[selectedTileIndex][1] == 0) {
             // Caso tessera [0 0]
@@ -97,8 +108,13 @@ void addTileToList4 (int ** playerDeck, int selectedTileIndex, bool isFlipped, g
 }
 
 int scoreCalculator (gameNodeLinList * testa) {
-
-    return 1;
+    int score = 0;
+    while (testa) {
+        score = score + testa -> top;
+        score = score + testa -> bottom;
+        testa = testa -> next;
+    }
+    return score;
 }
 
 void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, bool animation, int playerDeckDimension, gameNodeLinList *testa) {
@@ -113,6 +129,7 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
     printf("| D      -  Scorri le tiles a destra (una alla volta)\n");
     printf("| W      -  Piazza la tessera colorata di rosso\n");
     printf("| S      -  Piazza la tessera colorata di rosso e girala\n");
+    printf("| SPACE  -  Chiedi aiuto all'Ai\n");
     printf("| Altro  -  Torna al menu precedente\n\n\n");
     printCentered("Tiles a tua disposizione:");
     colorzz(0);
@@ -123,17 +140,29 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
     int columnToSpawn = 0;
     for (int counter = startingTileIndex; counter < tilesPerScreen + startingTileIndex; counter ++) {
         if (counter < playerDeckDimension + startingTileIndex){
-            spawnTile(playerDeck[counter][0], playerDeck[counter][1], 18*columnToSpawn, selectedTileIndex == counter);
+            gameNodeLinList * copyOfTesta = testa;
+            bool hasBeenUsed = false;
+            while (copyOfTesta) {
+                if (copyOfTesta -> index == counter || copyOfTesta -> index == -counter) {
+                    hasBeenUsed = true;
+                }
+                copyOfTesta = copyOfTesta -> next;
+            }
+            if (hasBeenUsed) {
+                spawnTile(playerDeck[counter][0], playerDeck[counter][1], 18*columnToSpawn, 3);
+            } else {
+                spawnTile(playerDeck[counter][0], playerDeck[counter][1], 18*columnToSpawn, selectedTileIndex == counter);
+            }
             columnToSpawn++;
         } else {
             break;
         }
     }
     printf("\033[12B\n");
-    //printf("DEBUG:\nTiles selezionata = %d \nTiles = [%d | %d]\n", selectedTileIndex, playerDeck[selectedTileIndex][0], playerDeck[selectedTileIndex][1]);
+    /*printf("DEBUG:\nTiles selezionata = %d \nTiles = [%d | %d]\n", selectedTileIndex, playerDeck[selectedTileIndex][0], playerDeck[selectedTileIndex][1]);
     colorzz(2);
     printf("| Q      -  Scorri le tiles a sinistra (una alla volta)\n");
-    printf("| E      -  Scorri le tiles a destra (una alla volta)\n\n\n");
+    printf("| E      -  Scorri le tiles a destra (una alla volta)\n\n\n");*/
 
     if (!testa) {
         printCentered("Tavolo vuoto... Inizia a piazzare le tessere selezionando quella desiderata.");
@@ -164,6 +193,8 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
             copyOfTestaDebug = copyOfTestaDebug -> next;
         }
     }
+
+    printf("\n\nPunteggio: %d", scoreCalculator(testa));
 
 
     // LOGICA INPUT
@@ -198,10 +229,14 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
             // Se volessimo aggiungere in testa dovremmo passare il puntatore del puntatore, dunque lo facciamo estermente da addTileToList4
             if (!testa) {
                 // Tavolo vuoto. Bisogna creare una testa e popolarla con la tessera scelta.
-                testa = (gameNodeLinList*)malloc(sizeof (gameNodeLinList));
-                testa -> index = selectedTileIndex;
-                testa -> top = playerDeck[selectedTileIndex][0];
-                testa -> bottom = playerDeck[selectedTileIndex][1];
+                if (playerDeck[selectedTileIndex][0] == 11 || playerDeck[selectedTileIndex][0] == 12 || playerDeck[selectedTileIndex][0] == 0) {
+                    showAlert("Mossa non permessa.");
+                } else {
+                    testa = (gameNodeLinList *) malloc(sizeof(gameNodeLinList));
+                    testa->index = selectedTileIndex;
+                    testa->top = playerDeck[selectedTileIndex][0];
+                    testa->bottom = playerDeck[selectedTileIndex][1];
+                }
             } else {
                 addTileToList4(playerDeck, selectedTileIndex, false, testa);
             }
@@ -210,18 +245,56 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
         case ASCII_S:
             if (!testa) {
                 // Tavolo vuoto. Bisogna creare una testa e popolarla con la tessera scelta invertita.
-                testa = (gameNodeLinList*)malloc(sizeof (gameNodeLinList));
-                testa -> index = selectedTileIndex;
-                testa -> top = playerDeck[selectedTileIndex][1];
-                testa -> bottom = playerDeck[selectedTileIndex][0];
+                if (playerDeck[selectedTileIndex][0] == 11 || playerDeck[selectedTileIndex][0] == 12 || playerDeck[selectedTileIndex][0] == 0) {
+                    showAlert("Mossa non permessa.");
+                } else {
+                    testa = (gameNodeLinList*)malloc(sizeof (gameNodeLinList));
+                    testa -> index = -selectedTileIndex;
+                    testa -> top = playerDeck[selectedTileIndex][1];
+                    testa -> bottom = playerDeck[selectedTileIndex][0];
+                }
             } else {
                 // Testa esistente, quindi scorro la lista e aggiungo la nuova tessera invertita alla fine.
                 addTileToList4(playerDeck, selectedTileIndex, true, testa);
             }
             fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
             break;
+        case ASCII_Space:
+            // Creazione nuovo deck che possa essere parsato da ai (uguale a playerdeck ma con 666 al posto delle tessere già usate)
+            newPD = allocPlayerDeckMemory(playerDeckDimension);
+            for (int c = 0; c < playerDeckDimension; c++) {
+                gameNodeLinList * copyOfTesta = testa;
+                bool hasBeenUsed = false;
+                while (copyOfTesta) {
+                    if (copyOfTesta -> index == c || copyOfTesta -> index == -c) {
+                        hasBeenUsed = true;
+                        break;
+                    }
+                    copyOfTesta = copyOfTesta -> next;
+                }
+                if (hasBeenUsed){
+                    newPD[c][0] = 666;
+                    newPD[c][1] = 666;
+                } else {
+                    newPD[c][0] = playerDeck [c][0];
+                    newPD[c][1] = playerDeck [c][1];
+                }
+            }
+            // ripristinare l'ultima tessera selezionata, punto di partenza per l'AI
+            gameNodeLinList * copyOfTesta = testa;
+            while (copyOfTesta -> next) {
+                copyOfTesta = copyOfTesta -> next;
+            }
+            newPD[copyOfTesta->index][0] = copyOfTesta -> top;
+            newPD[copyOfTesta->index][1] = copyOfTesta -> bottom;
+
+            int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
+            AiResult = processAI(newPD, playerDeckDimension, copyOfTesta -> index, &processAIDimension);
+            fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
+            break;
         default:
             menuUi();
+            // TODO free di tutte le variabili temporanee
             break;
     }
 }
