@@ -17,12 +17,13 @@ gcc -O2 -std=c99 --pedantic *.c ./fragments/*.c ./functions/*.c -o iap
 ```
 Sarà inoltre possibile invocare l'eseguibile con il parametro, che abilita  abilita la consegna per le challenge
 ```sh
-.\iap --challenge
+./iap --challenge
 ```
 # Descrizione e struttura del progetto
 Questo programma in C implementa una versione del gioco "Domino" con una serie di funzionalità che si adattano sia al gameplay standard che a modallità più complesse come il gameplay automatico e il domino su due dimensioni. Il programma, nel menù principale, include opzioni per visualizzare le tessere, ottenere tessere, giocare al Domino standard e giocare al Domino 2D. Inoltre è stata inclusa una modalità di debug dell'algoritmo di gampeplay automatico richiamabile con "--challenge".
 * I vari menù sono stati implementati con la logica dei "fragments" ispirata allo sviluppo Android. Ogni menù, infatti, definisce e gestisce il proprio layout, ha un proprio ciclo di vita e può gestire i propri eventi di input fino alla sua chiusura.
-* I componenti grafici e le parti logiche riutilizzabili sono definiti nella cartella "functions". Tutti i componenti platform-specific sono stati sviluppati e testati singolarmente in un momento iniziale, per essere poi incapsulati in singole funzioni facilmente riutilizzabili.
+* I componenti grafici e le parti logiche riutilizzabili sono definiti nella cartella "functions". Tutti i componenti platform-specific sono stati sviluppati e testati singolarmente in un momento iniziale, per essere poi incapsulati in singole funzioni facilmente riutilizzabili. <br>Il programma è compatibile con Windows, MacOs e Linux (con X window system).
+* Si è deciso di non usare librerie esterne, se non quelle fornite dall'Os come <sys/ioctl.h> <unistd.h> <termios.h> <windows.h> <conio.h>
 
 ## Funzionalità
 
@@ -62,8 +63,8 @@ La fase iniziale del progetto, concernente la sua pianificazione, ha coinvolto u
 
 ##### Barison Alberto:
 * Conduzione di verifiche e test specifici per funzioni Windows.
-* Design e implementazione della versione iniziale della Ai (domino lineare senza tessere speciali).
-* Implementazione domino 2D
+* Design della versione iniziale della Ai (domino lineare senza tessere speciali).
+* Design e implementazione domino 2D
 ##### Cuniolo Raffaele:
 * Coordinamento del progetto e mantenimento repository GitHub.
 * Redazione della documentazione e supervisione dei commenti nel codice.
@@ -71,11 +72,11 @@ La fase iniziale del progetto, concernente la sua pianificazione, ha coinvolto u
 * Design e implementazione della versione iniziale della Ai (domino lineare senza tessere speciali).
 * Design e implementazione della versione rivisitata della Ai (domino lineare con tessere speciali).
 * Design e implementazione interfaccia grafica e flusso di interazione.
-* Implementazione domino lineare.
-##### Veggis Francesco
-* Conduzione di verifiche e test specifici per funzioni Windows.
-* Implementazione domino 2D
+* Design e implementazione domino lineare.
+##### Veggis Francesco:
+* Design e implementazione domino 2D
 
 # Diﬀicoltà incontrate
 Si sono incontrate difficoltà nella gestione delle scadenze inizialmente prefissate, specie in seguito alla pubblicazione delle due challenge. 
 <br>L'utilizzo corretto delle funzioni già create e l'adozione di uno stile di programmazione uniforme si è rivelato un ulteriore ostacolo, richiedendo un costante sforzo per mantenere il sorgente "pulito" e privo di ripetizioni o conflitti.
+<br>Oltre a ciò, vista la carenza di tempo dovuta a vari problemi organizzativi, non è stata particolarmente curata la qualità del codice, che risulta talvolta difficile da comprendere e interpretare.
