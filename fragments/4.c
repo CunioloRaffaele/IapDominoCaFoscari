@@ -290,6 +290,18 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
 
             int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
             AiResult = processAI(newPD, playerDeckDimension, copyOfTesta -> index, &processAIDimension);
+            printf("%d", processAIDimension);
+            if (processAIDimension >= 1) {
+                // index della seconda mossa
+                int indexOfNextStep = AiResult[1];
+                if (indexOfNextStep >= 0){
+                    addTileToList4(playerDeck, indexOfNextStep, false, testa);
+                }else {
+                    addTileToList4(playerDeck, -indexOfNextStep, true, testa);
+                }
+            } else {
+                showAlert("L'ai non può aiutarti in questo caso :(");
+            }
             fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
             break;
         default:

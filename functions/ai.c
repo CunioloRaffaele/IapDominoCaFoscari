@@ -149,6 +149,7 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
             int latestCard1Face;
             if (indexOfLatestCard < 0) {
                 // Dobbiamo considerare la prima faccia della tessera
+                // Qui non serve fare il parsing perchè una tessera flippata non può essere una tessera speciale.
                 latestCard1Face = deck[-indexOfLatestCard][0];
             } else {
                 // Dobbiamo considerare la seconda faccia della tessera
@@ -291,12 +292,25 @@ int* processAI (int** deck, int deckDimension, int indexOfStartingTile, int *num
                 *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
 
             } else {
-
-                // TODO: Gestire il caso in cui non ci sono tessere compatibili
-
-                // Se la tessera non è un match con la precedente faccia rimuovo deckCopy[rowCounter][0] e deckCopy[rowCounter][1]
-                deckCopy[rowCounter][0] = 666;
-                deckCopy[rowCounter][1] = 666;
+                // Gestire il caso in cui non ci sono tessere compatibili
+                if (index00 >= 0) {
+                    *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
+                    // Rimuoviamo la tessera dal deck
+                    deckCopy[index00][0] = 666;
+                    deckCopy[index00][1] = 666;
+                } else if (index1111 >= 0){
+                    *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
+                    deckCopy[index00][0] = 666;
+                    deckCopy[index00][1] = 666;
+                }else if (index1221 >= 0){
+                    *numbersOfElementsIndexInOrder = *numbersOfElementsIndexInOrder + 1;
+                    deckCopy[index00][0] = 666;
+                    deckCopy[index00][1] = 666;
+                } else {
+                    // Se la tessera non è un match con la precedente faccia rimuovo deckCopy[rowCounter][0] e deckCopy[rowCounter][1]
+                    deckCopy[rowCounter][0] = 666;
+                    deckCopy[rowCounter][1] = 666;
+                }
             }
         }
     }
