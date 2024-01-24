@@ -15,6 +15,15 @@ void showAlert (char text[]) {
         strcat(result, str2);
         system(result);
     #elif  __linux__ || __unix__                                                    // Linux
-        // TODO
+        // https://stackoverflow.com/questions/41225711/wsl-run-linux-from-windows-without-spawning-a-cmd-window
+        // https://www.commandlinux.com/man-page/man1/xmessage.1.html
+        char str1[] = DISPLAY=:0 xmessage '";
+        char str2[] = "\"'";
+        char result[strlen(str1) + strlen(str2) + strlen(text)];
+        strcpy(result, str1);
+        strcat(result, text);
+        strcat(result, str2);
+        system(result);
+
     #endif
 }
