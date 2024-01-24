@@ -236,9 +236,11 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
                     testa->index = selectedTileIndex;
                     testa->top = playerDeck[selectedTileIndex][0];
                     testa->bottom = playerDeck[selectedTileIndex][1];
+                    fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
                 }
             } else {
                 addTileToList4(playerDeck, selectedTileIndex, false, testa);
+                fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
             }
             fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
             break;
@@ -252,10 +254,12 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
                     testa -> index = -selectedTileIndex;
                     testa -> top = playerDeck[selectedTileIndex][1];
                     testa -> bottom = playerDeck[selectedTileIndex][0];
+                    fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
                 }
             } else {
                 // Testa esistente, quindi scorro la lista e aggiungo la nuova tessera invertita alla fine.
                 addTileToList4(playerDeck, selectedTileIndex, true, testa);
+                fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
             }
             fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
             break;

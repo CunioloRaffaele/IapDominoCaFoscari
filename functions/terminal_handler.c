@@ -19,6 +19,7 @@ int getch(void) {
 
     #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
         return _getch();
+        FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
     #elif __APPLE__ || __linux__ || __unix__                                        // MacOs + Linux
         struct termios oldattr, newattr;
         int ch;
