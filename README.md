@@ -11,7 +11,11 @@
 </p>
 
 # Compilazione
-Il codice deve compilare con il comando
+Download del repository pubblico
+```sh
+git clone https://github.com/CunioloRaffaele/IapDominoCaFoscari.git
+```
+Il codice deve compilare con il comando (ma il progetto è configurato anche con CMakeList.txt)
 ```sh
 gcc -O2 -std=c99 --pedantic *.c ./fragments/*.c ./functions/*.c -o iap
 ```
@@ -42,12 +46,11 @@ Questo programma in C implementa una versione del gioco "Domino" con una serie d
 ### 4. Gioca al Domino
 
 >Selezionare l'opzione 4 per avviare una partita standard di Domino. Questa opzione potrà anche guidare i giocatori attraverso il processo di gioco suggerendo mosse e calcolando l'attuale punteggio di gioco.
->> #### Implementazione algoritmo di suggerimento mosse:
->> 
+
 
 ### 5. Gioca al Domino 2D
 
->Selezionare l'opzione 5 per giocare a una variante del gioco nota come "Domino 2D". Questa variante permette di posizionare le tessere in maniera orizzontale e verticale. 
+>Selezionare l'opzione 5 per giocare a una variante del gioco nota come "Domino 2D". Questa variante permette di posizionare le tessere in maniera orizzontale e verticale su un tavolo di gioco X x Y. 
 
 # Organizzazione lavoro di gruppo
 ### Software Utilizzati:
@@ -62,9 +65,10 @@ La fase iniziale del progetto, concernente la sua pianificazione, ha coinvolto u
 <br>A intervalli settimanali sono stati condotti incontri di verifica e test al fine di risolvere eventuali problematiche legate alla fusione delle nuove sezioni di codice e per verificare il conseguimento delle Milestone stabilite.
 
 ##### Barison Alberto:
-* Conduzione di verifiche e test specifici per funzioni Windows.
+* Conduzione di verifiche e test specifici per funzioni Windows (e WSL).
 * Design della versione iniziale della Ai (domino lineare senza tessere speciali).
-* Design e implementazione domino 2D
+* Design e implementazione domino 2D.
+* Design e implementazione dell'Ai in grado di trovare la migliore tessera da giocare a inizio partita.
 ##### Cuniolo Raffaele:
 * Coordinamento del progetto e mantenimento repository GitHub.
 * Redazione della documentazione e supervisione dei commenti nel codice.
@@ -73,8 +77,11 @@ La fase iniziale del progetto, concernente la sua pianificazione, ha coinvolto u
 * Design e implementazione della versione rivisitata della Ai (domino lineare con tessere speciali).
 * Design e implementazione interfaccia grafica e flusso di interazione.
 * Design e implementazione domino lineare.
+* Design e implementazione domino 2D.
 ##### Veggis Francesco:
-* Design e implementazione domino 2D
+* Conduzione di verifiche e test specifici per funzioni Windows (e WSL).
+* BugFix Ai.
+* Design e implementazione dell'Ai in grado di trovare la migliore tessera da giocare a inizio partita.
 
 # Diﬀicoltà incontrate
 Si sono incontrate difficoltà nella gestione delle scadenze inizialmente prefissate, specie in seguito alla pubblicazione delle due challenge. 
