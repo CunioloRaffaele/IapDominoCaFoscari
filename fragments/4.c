@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+    #include <windows.h>
+    #include <conio.h>
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    int ret;
+#endif
 #include "../fragments.h"
 
 int **newPD;
@@ -198,6 +204,9 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
 
 
     // LOGICA INPUT
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+        FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+    #endif
     int input = getch();
     switch (input)
     {
