@@ -244,6 +244,10 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
             fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
             break;
         case ASCII_Space:
+            if (!testa) {
+                showAlert("Segli una tessera dalla quale iniziare la partita.");
+                fragment4(playerDeck, startingTileIndex, startingTileIndex, false, playerDeckDimension, testa);
+            }
             // Creazione nuovo deck che possa essere parsato da ai (uguale a playerdeck ma con 666 al posto delle tessere già usate)
             newPD = allocPlayerDeckMemory(playerDeckDimension);
             for (int c = 0; c < playerDeckDimension; c++) {
