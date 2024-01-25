@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+    #include <windows.h> // Windows
+#endif
 #include "../functions.h"
 
 void showAlert (char text[]) {
-    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows    
         int test = MessageBoxA(NULL, text, "Domino", 0);
     #elif __APPLE__                                                                 // MacOs
         char str1[] = "osascript -e 'tell app \"Terminal\" to display dialog \"";
