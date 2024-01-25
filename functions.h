@@ -147,6 +147,13 @@ int aiEvaluation (int**, int);
 */
 void showAlert (char[]);
 
+/**
+* Verifica copatibbilità tra due tessere (anche speciale)
+* @param int Faccia precedente
+* @param int Faccia successiva
+*/
+bool verifyCompatibility4 (int, int);
+
 // LE SEGUENTI SONO FUNZIONI CHE VANNO USATE SOLO QUANDO IL PROGRAMMA VIENE LANCIATO CON IL PARAMETRO --challenge
 
 /**

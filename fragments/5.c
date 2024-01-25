@@ -12,10 +12,10 @@ struct gameNode2DLin {
 };
 
 // Array contenente i puntatori di memoria alle liste di tessere già piazzate (ogni riga ha una lista di tessere)
-gameNode2DLinList* rowPointers [5];
+gameNode2DLinList* rowPointers [15];
 
 int maxOrizzontalSpan = 0;
-int verticalSpan = 5;
+int verticalSpan = 1;
 
 gameNode2DLinList* generate2DNode(int column, int top, int bottom, bool isReversed, bool whatFaceToMatch, int indexToRemove, int **playerDeck) {
     playerDeck[indexToRemove][0] = 666;
@@ -55,10 +55,14 @@ bool isSlotOccupied(int column, int row, int isVertical) { //Verifica che la pos
     return isOcc;
 }
 
+
+
+
 // Questa funzione modifica playerdeck e cambia le tessere già usate con 666.
 void fragment5(int **playerDeck,int playerDeckDimension) {
-    colorzz(0);
     clearConsole();
+    spawnScreenWithTitle("DOMINO 2D", false);
+    colorzz(0);
 
     // Stampa del deck generato al fragment 2
     for (int c = 0; c < playerDeckDimension; c ++) {
@@ -150,6 +154,9 @@ void fragment5(int **playerDeck,int playerDeckDimension) {
         if (columnSelected >= maxOrizzontalSpan) {
             maxOrizzontalSpan = columnSelected;
         }
+         if (rowSelected >= verticalSpan + 1) {
+            verticalSpan = rowSelected + 1;
+        }
         if(rowPointers[rowSelected] == NULL){
             // Se la testa di una determinata linea non esiste, la creo e la popolo
             rowPointers[rowSelected] = generate2DNode(columnSelected, playerDeck[indexSelected][0], playerDeck[indexSelected][1], isReversed, 1,indexSelected, playerDeck);
@@ -161,6 +168,12 @@ void fragment5(int **playerDeck,int playerDeckDimension) {
             }
             // Hadling della posizione verticale
             if (isVertical){
+                int confronto;
+                if (isReversed){
+                    confronto = playerDeck[indexSelected][1];
+                } else {
+                    confronto = playerDeck[indexSelected][0];
+                }
                 // Scorro la riga sopra e piazzo la tessera verticale alla fine
                 gameNode2DLinList *rowPointerTemp = rowPointers[rowSelected];
                 while(rowPointerTemp -> next){
@@ -168,24 +181,36 @@ void fragment5(int **playerDeck,int playerDeckDimension) {
                 }
                 int previousTop = playerDeck[indexSelected][0];
                 int previousBottom = playerDeck[indexSelected][1];
-                rowPointerTemp -> next = generate2DNode(columnSelected, playerDeck[indexSelected][0], playerDeck[indexSelected][1], isReversed, 0,indexSelected, playerDeck);
-                // Scorro la riga sotto e piazzo la tessera verticale alla fine
-                rowPointerTemp = rowPointers[rowSelected + 1];
-                if (rowPointerTemp == NULL) {
-                    rowPointers[rowSelected + 1] = generate2DNode(columnSelected, previousTop, previousBottom, isReversed, 1,indexSelected, playerDeck);
-                }else {
-                    while(rowPointerTemp -> next){
-                        rowPointerTemp = rowPointerTemp -> next;
-                        }
-                        rowPointerTemp -> next = generate2DNode(columnSelected, previousTop, previousBottom, isReversed, 1,indexSelected, playerDeck);
+                if (verifyCompatibility4(confronto, rowPointerTemp->bottom)) {
+                    rowPointerTemp -> next = generate2DNode(columnSelected, playerDeck[indexSelected][0], playerDeck[indexSelected][1], isReversed, 0,indexSelected, playerDeck);
+                    // Scorro la riga sotto e piazzo la tessera verticale alla fine
+                    rowPointerTemp = rowPointers[rowSelected + 1];
+                    if (rowPointerTemp == NULL) {
+                        rowPointers[rowSelected + 1] = generate2DNode(columnSelected, previousTop, previousBottom, isReversed, 1,indexSelected, playerDeck);
+                    }else {
+                        while(rowPointerTemp -> next){
+                            rowPointerTemp = rowPointerTemp -> next;
+                            }
+                            rowPointerTemp -> next = generate2DNode(columnSelected, previousTop, previousBottom, isReversed, 1,indexSelected, playerDeck);
+                    }
                 }
+            // Handling della posizione ez
             } else {
-                // Se la testa è già stata creata e non è girata, scorro la lista fino alla fine e aggiungo la nuova tessera
                 gameNode2DLinList *rowPointerTemp = rowPointers[rowSelected];
                 while(rowPointerTemp -> next){
                     rowPointerTemp = rowPointerTemp -> next;
                 }
-                rowPointerTemp -> next = generate2DNode(columnSelected, playerDeck[indexSelected][0], playerDeck[indexSelected][1], isReversed, 1,indexSelected, playerDeck);
+                int confronto;
+                if (isReversed){
+                    confronto = playerDeck[indexSelected][1];
+                } else {
+                    confronto = playerDeck[indexSelected][0];
+                }
+                if (verifyCompatibility4(confronto, rowPointerTemp -> bottom)) {
+                    rowPointerTemp -> next = generate2DNode(columnSelected, playerDeck[indexSelected][0], playerDeck[indexSelected][1], isReversed, 1,indexSelected, playerDeck);
+                } else {
+                    showAlert("Non puoi piazzare la tessera in questa posizione! La tessera non combacia con la tessera precedente.");
+                }
             }
 
 

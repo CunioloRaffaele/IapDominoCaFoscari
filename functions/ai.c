@@ -4,6 +4,16 @@
 
 #include "../functions.h"
 
+bool verifyCompatibility4 (int prec, int succ) {
+    if (prec == succ) {
+        return true;
+    } else if ( succ == 11 || succ == 12 || succ == 0 || prec == 0 || prec == 21 || prec == 11) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // Si potrebbe rimuovere le tessere valutate dall'array di copia spostando le tessere successive di una posizione in avanti e riallocando l'array,
 // ma questo causerebbe gli indici dell'array di copia a cambiare e quindi non sarebbe più possibile utilizzare l'array originale per stampare le tessere.
 // Per questo motivo è stato scelto di non rimuovere le tessere valutate dall'array di copia bensì di sostituirle con un valore arbitrario '666'.

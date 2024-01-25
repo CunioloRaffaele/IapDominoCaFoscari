@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
         }
         if ((strcmp((argv[i]), "--debugging")) == 0) {
             spawnScreenWithTitle("Debugging status", false);
-            playerDeckDimension = 4;
+            playerDeckDimension = 10;
             playerDeck = allocPlayerDeckMemory(playerDeckDimension);
             generateTilesComposition(gameSet);
             generatePlayerDeck(gameSet, playerDeck, playerDeckDimension);

@@ -21,16 +21,6 @@ void free_list_it(gameNodeLinList *l) {
     }
 }
 
-bool verifyCompatibility4 (int prec, int succ) {
-    if (prec == succ) {
-        return true;
-    } else if ( succ == 11 || succ == 12 || succ == 0 || prec == 0 || prec == 21 || prec == 11) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 void addTileToList4 (int ** playerDeck, int selectedTileIndex, bool isFlipped, gameNodeLinList *testa) {
     // Variabile temporanea per scorrere la lista "testa"
     // (in teoria non servirebbe visto che stiamo usando una copia del puntatore originale ma sono le 2 di notte e quindi rimarrà così...)
