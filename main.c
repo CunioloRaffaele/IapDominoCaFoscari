@@ -89,7 +89,9 @@ void menuUi (void) {
         if (playerDeck == NULL) {
             showAlert("Questa opzione è disponibile solo dopo aver generato un deck di tiles.");
             menuUi();
-        }else {}
+        }else {
+            fragment5(playerDeck, playerDeckDimension);
+        }
         break;
     default:
         break;
