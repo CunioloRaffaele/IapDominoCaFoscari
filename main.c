@@ -105,9 +105,9 @@ void challengeMode (void) {
     for (int counter = 0; counter < playerDeckDimension; counter ++) {
         scanf("%d %d", &playerDeck[counter][0], &playerDeck[counter][1]);
     }
-    //int bestStartingTile = aiEvaluation(playerDeck, playerDeckDimension);
+    int bestStartingTile = aiEvaluation(playerDeck, playerDeckDimension);
     int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
-    int* AiResult = processAI(playerDeck, playerDeckDimension, 0, &processAIDimension);
+    int* AiResult = processAI(playerDeck, playerDeckDimension, bestStartingTile, &processAIDimension);
 
     printCardsForChallenge(playerDeck, AiResult, processAIDimension);
 
@@ -140,7 +140,7 @@ int main(int argc, char* argv[]) {
                 printf("%d %d\n", playerDeck[counter][0], playerDeck[counter][1]);
             }
             printf("Mosse AI\n");
-            int processAIDimension; // Questa variabile viene passarta come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
+            int processAIDimension; // Questa variabile viene passata come puntatore e conterrà la dimensione dell'array di output della funzione AiResult()
             int* AiResult = processAI(playerDeck, playerDeckDimension, 0, &processAIDimension);
             printf("AI dimension = %d\n", processAIDimension);
             printCardsForChallenge(playerDeck, AiResult, processAIDimension);
