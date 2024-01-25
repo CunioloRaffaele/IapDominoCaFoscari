@@ -12,10 +12,10 @@ struct gameNode2DLin {
 };
 
 // Array contenente i puntatori di memoria alle liste di tessere già piazzate (ogni riga ha una lista di tessere)
-gameNode2DLinList* rowPointers [15];
+gameNode2DLinList* rowPointers [5];
 
 int maxOrizzontalSpan = 0;
-int verticalSpan = 1;
+int verticalSpan = 5;
 
 gameNode2DLinList* generate2DNode(int column, int top, int bottom, bool isReversed, bool whatFaceToMatch, int indexToRemove, int **playerDeck) {
     playerDeck[indexToRemove][0] = 666;
@@ -153,9 +153,6 @@ void fragment5(int **playerDeck,int playerDeckDimension) {
     } else {
         if (columnSelected >= maxOrizzontalSpan) {
             maxOrizzontalSpan = columnSelected;
-        }
-         if (rowSelected > verticalSpan + 1 || (isVertical && rowSelected + 1 == verticalSpan)) {
-            verticalSpan = rowSelected + 1;
         }
         if(rowPointers[rowSelected] == NULL){
             // Se la testa di una determinata linea non esiste, la creo e la popolo
