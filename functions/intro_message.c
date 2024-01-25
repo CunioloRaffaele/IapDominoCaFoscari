@@ -43,6 +43,9 @@ void introMessage(void)
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
     printCentered("      Si suggerisce di non usare questo programma su cmd di Windows      ");
     printCentered("                    ma di eseguirlo con PowerShell.                      ");
+#elif __linux__ || __unix__  // Linux
+    printCentered("              Per linux è richiesto X window system.                      ");
+    printCentered("        Comando per install: sudo apt-get install x-windows-system        ");
 #endif
     printf("\n\n");
     colorzz(0);
