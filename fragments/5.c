@@ -154,7 +154,7 @@ void fragment5(int **playerDeck,int playerDeckDimension) {
         if (columnSelected >= maxOrizzontalSpan) {
             maxOrizzontalSpan = columnSelected;
         }
-         if (rowSelected >= verticalSpan + 1) {
+         if (rowSelected > verticalSpan + 1 || (isVertical && rowSelected + 1 == verticalSpan)) {
             verticalSpan = rowSelected + 1;
         }
         if(rowPointers[rowSelected] == NULL){
