@@ -423,18 +423,7 @@ int *processAI(int **deck, int deckDimension, int indexOfStartingTile, int *numb
     {
         exit(1);
     }
-    /*
-    int wildcard = getIndexOfWildcard(deck, deckDimension, 0, 0);
-    printf("Wildcard %d\n", wildcard);
-    int test[6] = {0,1,2,3,4,5};
-    int** te = arrayParser(deck, test, deckDimension);
-    for (int i = 0; i < deckDimension; i++) {
-        printf("Array Parser %d %d\n", te[i][0], te[i][1]);
-    }
-    int summmm = getSumOfArray(te, *numbersOfElementsIndexInOrder);
-    printf("Sum %d\n", summmm);*/
 
-    // Ritorniamo l'array contenente gli indici in ordine dell'array deck passato in argomento alla funzione
     return indexInOrder;
 }
 

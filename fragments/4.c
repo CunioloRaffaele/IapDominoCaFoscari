@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+    #include <windows.h>
+    #include <conio.h>
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    int ret;
+#endif
 #include "../fragments.h"
 
 int **newPD;
@@ -109,10 +115,6 @@ int scoreCalculator (gameNodeLinList * testa) {
 
 void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, bool animation, int playerDeckDimension, gameNodeLinList *testa) {
     spawnScreenWithTitle("DOMINO LINEARE", animation);
-    /*if (screenRow() <= 50) {
-        showAlert("La dimensione del terminale non è adeguata per contenere tutti gli elementi di gioco (almeno 90 righe x 50 colonne). Ingrandisci il terminale e ritenta");
-        menuUi();
-    }*/
 
     colorzz(2);
     printf("| A      -  Scorri le tiles a sinistra (una alla volta)\n");
@@ -161,21 +163,6 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
     }
     colorzz(0);
 
-    // Variabile temporanea per scorrere la lista "testa"
-    /*gameNodeLinList * copyOfTesta = testa;
-    if (testa) {
-        int columnToSpawnPlayerTable = 0;
-        while (copyOfTesta) {
-            if (columnToSpawnPlayerTable > tilesPerScreen) {
-                break;
-            }
-            if (copyOfTesta -> index >= 0) {
-                spawnTile(playerDeck[copyOfTesta -> index][0], playerDeck[copyOfTesta -> index][1], 18*columnToSpawnPlayerTable, false);
-                columnToSpawnPlayerTable++;
-            }
-            copyOfTesta = copyOfTesta-> next;
-        }
-    }*/
     gameNodeLinList * copyOfTestaDebug = testa;
     if (copyOfTestaDebug) {
         while (copyOfTestaDebug) {
@@ -188,6 +175,9 @@ void fragment4(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
 
 
     // LOGICA INPUT
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)  // Windows
+        FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+    #endif
     int input = getch();
     switch (input)
     {

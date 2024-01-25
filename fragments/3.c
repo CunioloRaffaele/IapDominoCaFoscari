@@ -23,7 +23,6 @@ void fragment3(int **playerDeck, int startingTileIndex, int selectedTileIndex, b
         }
     }
     printf("\033[12B\n");
-    //printf("%d %d\n\n", startingTileIndex, startingTileIndex + tilesPerScreen);
     printf("In game potrai usare altre tre tessere speciali:\n\n");
     printf("[0|0]     può essere accostata a qualunque altra tessera. Esempio: [1|2][0|0][5|6]\n");
     printf("[11|11]   somma 1 a tutte le cifre di tutte le tessere sul piano di gioco tranne il 6\n          che diventa 1. La tessera può essere posizionata in qualunque posizione e \n          le sue cifre vegono sostituite con la cifra adiacente dopo averla incrementata di 1. \n          Esempio: [1|6][6|3][11|11] diventa [2|1][1|4][4|4]\n");
