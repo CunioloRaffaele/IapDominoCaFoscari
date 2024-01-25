@@ -2,8 +2,7 @@
 
 #include "../functions.h"
 
-void introMessage(void)
-{
+void introMessage(void){
     /*char asciiArtString[] =
         "             88                                88                          \n"
         "             88                                88                          \n"
